@@ -1,0 +1,40 @@
+name: deploy-plausible
+
+on:
+  push:
+    paths:
+      - '.github/workflows/plausible.yml'
+      - 'plausible/**'
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Tailscale
+        uses: tailscale/github-action@ce41a99162202a647a4b24c30c558a567b926709
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          hostname: Github-actions
+          version: 1.36.2
+
+      - name: Start Deployment
+        uses: aosus/docker-compose-gitops-action@v1
+        env:
+          SECRET_KEY_BASE: ${{ secrets.plausible_secret_key_base }}
+          SMTP_USER_PWD: ${{ secrets.plausible_smtp_user_pwd }}
+          GOOGLE_CLIENT_ID: ${{ secrets.plausible_google_client_id }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.plausible_google_client_secret }}
+        with:
+          remote_docker_host: ${{ secrets.server_address }}
+          tailscale_ssh: true # no need for manual private and public keys
+          compose_file_path: plausible/docker-compose.yml
+          args: -p plausible up -d --remove-orphans
+          upload_directory: true
+          docker_compose_directory: plausible

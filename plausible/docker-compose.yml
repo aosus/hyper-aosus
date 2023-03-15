@@ -1,0 +1,65 @@
+networks: 
+  default:
+  web:
+    external: true
+
+services:
+  plausible_db:
+    restart: unless-stopped
+    image: postgres:12-alpine
+    volumes:
+      - /home/aosus/plausible/postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD
+
+  plausible_events_db:
+    restart: unless-stopped
+    image: clickhouse/clickhouse-server:22.6-alpine
+    volumes:
+      - /home/aosus/plausible/event-data:/var/lib/clickhouse
+    configs:
+      - source: clickhouse-config
+        target: /etc/clickhouse-server/config.d/logging.xml
+      - source: clickhouse-user-config
+        target: /etc/clickhouse-server/users.d/logging.xml
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+  plausible:
+    restart: unless-stopped
+    image: plausible/analytics:latest
+    container_name: plausible
+    command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
+    expose:
+      - 8000
+    depends_on:
+      - plausible_db
+      - plausible_events_db
+    # ports:
+      # - 8004:8000
+    environment:
+      - BASE_URL=https://pa.aosus.org
+      - DISALBLE_REGISTRATION=true
+      - MAILER_EMAI=stats@services.aosus.org
+      - SMTP_HOST_ADDR=mailer.aosus.org
+      - SMTP_HOST_PORT=25
+      - SMTP_USER_NAME=aosus/aosus-hyper
+      - SECRET_KEY_BASE
+      - SMTP_USER_PWD
+      - GOOGLE_CLIENT_ID
+      - GOOGLE_CLIENT_SECRET
+    networks:
+      default:
+      web:
+
+volumes:
+  geoip:
+    driver: local
+
+configs:
+  clickhouse-config:
+    file: /home/aosus/plausible/clickhouse-config.xml
+  clickhouse-user-config:
+    file: /home/aosus/plausible/clickhouse-user-config.xml
