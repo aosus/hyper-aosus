@@ -38,7 +38,9 @@ services:
       - source: postal
         target: /config/postal.yml
       - source: signing-key
-        target: /config/signing.key:ro
+        target: /config/signing.key
+        uid: "0"
+        gid: "0"
     volumes:
       - /home/aosus/certbot/letsencrypt/:/ssl:ro
     networks:
@@ -141,6 +143,7 @@ services:
     environment:
       - MARIADB_DATABASE=postal
       - MARIADB_ROOT_PASSWORD
+      - MARIADB_AUTO_UPGRADE=true
     image: mariadb
     volumes:
       - /home/aosus/postal/mariadb:/var/lib/mysql
