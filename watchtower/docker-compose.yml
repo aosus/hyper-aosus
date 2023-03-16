@@ -2,8 +2,8 @@ version: '3.3'
 
 services:
   watchtower:
-    image: containrrr/watchtower
-    userns_mode: 'host' # dont isolate container
+    image: ghcr.io/containrrr/watchtower:latest
+    userns_mode: 'host' # server uses docker-ns, use 
     environment:
       - WATCHTOWER_NOTIFICATIONS_LEVEL=error # only send errors
       - WATCHTOWER_NOTIFICATION_URL
