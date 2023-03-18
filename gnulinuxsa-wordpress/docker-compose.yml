@@ -1,0 +1,41 @@
+version: '3.1'
+
+networks: 
+  default:
+  web:
+    external: true
+
+services:
+  wordpress:
+    image: wordpress:php7.4
+    container_name: gnulinuxsa-wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD: ${MARIADB_PASSWORD}
+    networks: 
+      default:
+      web:
+    volumes:
+      - /home/aosus/gnulinuxsa-wordpress/html:/var/www/html:rw
+    configs:
+      - source: custom-ini
+        target: /usr/local/etc/php/conf.d/custom.ini
+
+  mariadb:
+    image: mariadb:10
+    restart: always
+    environment:
+      MARIADB_USER: wordpress
+      MARIADB_DATABASE: wordpress
+      MARIADB_PASSWORD:
+      MARIADB_RANDOM_ROOT_PASSWORD: '1'
+      MARIADB_AUTO_UPGRADE: true
+    volumes:
+      - /home/aosus/gnulinuxsa-wordpress/mariadb:/var/lib/mysql:rw
+
+configs:
+  custom-ini:
+    file: /home/aosus/gnulinuxsa-wordpress/custom.ini
