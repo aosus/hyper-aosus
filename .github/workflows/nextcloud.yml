@@ -25,7 +25,7 @@ jobs:
           version: 1.36.2
 
       - name: Start Deployment
-        uses: aosus/docker-compose-gitops-action@v1
+        uses: FarisZR/docker-compose-gitops-action@v1
         env:
           POSTGRES_PASSWORD: ${{ secrets.nextcloud_postgres_password }}
           SMTP_USER_NAME: ${{ secrets.nextcloud_smtp_user_name }}
