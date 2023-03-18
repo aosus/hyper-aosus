@@ -37,7 +37,7 @@ jobs:
           echo "$SIGNING_KEY" > $GITHUB_WORKSPACE/postal/signing.key
 
       - name: Start Deployment
-        uses: aosus/docker-compose-gitops-action@v1
+        uses: FarisZR/docker-compose-gitops-action@v1
         env:
           MARIADB_ROOT_PASSWORD: ${{ secrets.postal_mariadb_root_password }}
           RABBITMQ_DEFAULT_PASS: ${{ secrets.postal_rabbitmq_default_pass }}

@@ -25,7 +25,7 @@ jobs:
           version: 1.36.2
 
       - name: Start Deployment
-        uses: aosus/docker-compose-gitops-action@v1
+        uses: FarisZR/docker-compose-gitops-action@v1
         env:
           SECRET_KEY_BASE: ${{ secrets.plausible_secret_key_base }}
           SMTP_USER_PWD: ${{ secrets.plausible_smtp_user_pwd }}
