@@ -1,0 +1,38 @@
+name: deploy-aosus-wordpress
+
+on:
+  push:
+    paths:
+      - '.github/workflows/aosus-wordpress.yml'
+      - 'aosus-wordpress/**'
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Tailscale
+        uses: tailscale/github-action@ce41a99162202a647a4b24c30c558a567b926709
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          hostname: Github-actions
+          version: 1.36.2
+
+      - name: Start Deployment
+        uses: aosus/docker-compose-gitops-action@v1
+        env:
+          MARIADB_PASSWORD: ${{ secrets.aosus_wordpress_mariadb_password }}
+          MARIADB_ROOT_PASSWORD: ${{ secrets.aosus_wordpress_mariadb_root_password }}
+        with:
+          remote_docker_host: ${{ secrets.server_address }}
+          tailscale_ssh: true # no need for manual private and public keys
+          compose_file_path: aosus-wordpress/docker-compose.yml
+          args: -p aosus-wordpress up -d --remove-orphans
+          upload_directory: true
+          docker_compose_directory: aosus-wordpress
