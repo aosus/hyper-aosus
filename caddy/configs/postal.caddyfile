@@ -1,0 +1,6 @@
+mailer.aosus.org {
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	}
+	reverse_proxy postal:5000
+}
