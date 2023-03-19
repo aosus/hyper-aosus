@@ -1,0 +1,10 @@
+auth.aosus.org {
+	@websockets {
+		header Connection *Upgrade*
+		header Upgrade websocket
+	}
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	}
+	reverse_proxy @websockets authentik:9000
+}

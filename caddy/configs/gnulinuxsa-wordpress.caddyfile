@@ -1,0 +1,7 @@
+gnulinuxsa.org {
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	}
+	reverse_proxy gnulinuxsa-wordpress:80
+	encode zstd gzip
+}

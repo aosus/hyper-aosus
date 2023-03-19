@@ -1,0 +1,10 @@
+{
+	email {env.EMAIL}
+	admin off
+}
+# generate cert for turn.aosus.org, but don't serve anything
+turn.aosus.org {
+	abort
+}
+
+import /etc/caddy/configs/*.caddyfile%

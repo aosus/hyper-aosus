@@ -1,0 +1,33 @@
+version: "3.7"
+
+networks:
+  web:
+    external: true
+
+services:
+  caddy:
+    image: caddy:alpine
+    container_name: caddy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      - EMAIL
+    configs:
+      - source: Caddyfile
+        target: /etc/caddy/Caddyfile
+    volumes:
+      - /home/ubuntu/caddy/configs:/etc/caddy/configs:ro
+      - data:/data
+      - config:/config
+    networks:
+      web:
+configs:
+  Caddyfile:
+    file: /home/aosus/caddy/Caddyfile
+
+volumes:
+  data:
+  config:
