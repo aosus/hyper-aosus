@@ -25,14 +25,18 @@ services:
     container_name: synapse
     restart: always
     volumes:
-      - /home/aosus/matrix/media_store:/data/media-store
+      - /home/aosus/matrix/media_store:/data/media_store:rw
+    environment:
+      - UID=991
+      - GID=991
+      - SYNAPSE_CONFIG_DIR=config
     configs:
       - source: synapse-homeserver
-        target: /data/homeserver.yaml
+        target: /config/homeserver.yaml
         uid: "991"
         gid: "991"
       - source: synapse-log-config
-        target: /data/log.config
+        target: /config/log.config
         uid: "991"
         gid: "991"
       - source: mautrix-telegram-appservice
