@@ -1,5 +1,3 @@
-version: '3.3'
-
 networks:
   default:
   telegram:
@@ -14,19 +12,20 @@ services:
     environment:
       - POSTGRES_DB=synapse
       - POSTGRES_USER=synapse
-      - POSTGRES_PASSWORD=${MATRIX_POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD
       - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
     volumes:
       - /home/aosus/matrix/postgresql:/var/lib/postgresql/data:rw
     networks:
       default:
 
+
   synapse:
     image: matrixdotorg/synapse:latest
     container_name: synapse
     restart: always
     volumes:
-      - /home/aosus/matrix/synapse/media_store:/data/media-store
+      - /home/aosus/matrix/media_store:/data/media-store
     configs:
       - source: synapse-homeserver
         target: /data/homeserver.yaml
@@ -40,7 +39,7 @@ services:
         target: /app-services/telegram.yaml
         uid: "991"
         gid: "991"
-      - source: mautrix-hookshot-appservice
+      - source: matrix-hookshot-appservice
         target: /app-services/hookshot.yml
         uid: "991"
         gid: "991"
@@ -59,6 +58,7 @@ services:
       default:
       web:
 
+
   synapse-admin:
     container_name: synapse-admin
     image: awesometechnologies/synapse-admin:latest
@@ -68,7 +68,7 @@ services:
 
   mautrix-telegram:
     container_name: mautrix-telegram
-    image: dock.mau.dev/mautrix/telegram:v0.13
+    image: dock.mau.dev/mautrix/telegram:v0.13.0
     configs:
       - source: mautrix-telegram-appservice
         target: /data/registration.yaml
@@ -77,6 +77,7 @@ services:
     networks:
       default:
       telegram:
+
 
   postgres-telegram:
     image: postgres:14-alpine
@@ -90,6 +91,7 @@ services:
       - /home/aosus/matrix/telegram/postgresql:/var/lib/postgresql/data:rw
     networks:
       telegram:
+
 
   matrix-hookshot:
     image: halfshot/matrix-hookshot:latest
@@ -113,21 +115,22 @@ services:
       web:
       default:
 
+
   coturn:
-      image: coturn/coturn:alpine
-      restart: always
-      ports:
-        - 3478:3478
-        - 3478:3478/udp
-        - 48000-49200:48000-49200/udp
-      environment:
-        - min-port=48000
-        - max-port=49200
-      volumes:
-        - /home/aosus/certbot/letsencrypt:/etc/letsencrypt:ro
-      configs:
-        - source: coturn
-          target: /etc/coturn/turnserver.conf
+    image: coturn/coturn:alpine
+    restart: always
+    ports:
+      - 3478:3478
+      - 3478:3478/udp
+      - 48000-49200:48000-49200/udp
+    environment:
+      - min-port=48000
+      - max-port=49200
+    volumes:
+      - /home/aosus/certbot/letsencrypt:/etc/letsencrypt:ro
+    configs:
+      - source: coturn
+        target: /etc/coturn/turnserver.conf
 
 configs:
   synapse-homeserver:
@@ -143,7 +146,7 @@ configs:
   matrix-hookshot-config:
     file: /home/aosus/matrix/matrix-hookshot/config.yaml
   coturn:
-    file: /home/matrix/turnserver.conf
+    file: /home/aosus/matrix/turnserver.conf
 # import secrets from environment variables set by the github runner
 secrets:
   matrix-signing-key:
@@ -151,4 +154,4 @@ secrets:
   matrix-hookshot-github-private-key:
     environment: "MATRIX_HOOKSHOT_GITHUB_PRIVATE_KEY"
   matrix-hookshot-pass-key:
-    environment: "MATRIX_HOOKSHOT_GITHUB_PASS_KEY"
+    environment: "MATRIX_HOOKSHOT_PASS_KEY"
