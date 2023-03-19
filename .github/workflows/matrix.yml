@@ -35,19 +35,19 @@ jobs:
           MATRIX_OIDC_CLIENT_SECRET: ${{ secrets.matrix_oidc_client_secret }}
           MATRIX_POSTGRES_PASSWORD: ${{ secrets.matrix_postgres_password }}
         run: |
-          sed -i "s/(matrix_turn_shared_secret)/$MATRIX_TURN_SHARED_SECRET/g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
-          sed -i "s/(matrix_registration_shared_secret)/$MATRIX_REGISTRATION_SHARED_SECRET/g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
-          sed -i "s/(matrix_macaroon_secret_key)/$MATRIX_MACAROON_SECRET_KEY/g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
-          sed -i "s/(matrix_oidc_issuer)/$MATRIX_OIDC_ISSUER/g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
-          sed -i "s/(matrix_oidc_client_id)/$MATRIX_OIDC_CLIENT_ID/g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
-          sed -i "s/(matrix_oidc_client_secret)/$MATRIX_OIDC_CLIENT_SECRET/g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
-          sed -i "s/(matrix_postgres_password)/$MATRIX_POSTGRES_PASSWORD/g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
+          sed -i "s|(matrix_turn_shared_secret)|$MATRIX_TURN_SHARED_SECRET|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
+          sed -i "s|(matrix_registration_shared_secret)|$MATRIX_REGISTRATION_SHARED_SECRET|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
+          sed -i "s|(matrix_macaroon_secret_key)|$MATRIX_MACAROON_SECRET_KEY|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
+          sed -i "s|(matrix_oidc_issuer)|$MATRIX_OIDC_ISSUER|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
+          sed -i "s|(matrix_oidc_client_id)|$MATRIX_OIDC_CLIENT_ID|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
+          sed -i "s|(matrix_oidc_client_secret)|$MATRIX_OIDC_CLIENT_SECRET|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
+          sed -i "s|(matrix_postgres_password)|$MATRIX_POSTGRES_PASSWORD|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
 
       - name: Add secrets to turnserver.conf
         env:
           MATRIX_TURN_SHARED_SECRET: ${{ secrets.matrix_turn_shared_secret }}
         run: |
-          sed -i "s/(matrix_turn_shared_secret)/$MATRIX_TURN_SHARED_SECRET/g" $GITHUB_WORKSPACE/matrix/turnserver.conf
+          sed -i "s|(matrix_turn_shared_secret)|$MATRIX_TURN_SHARED_SECRET|g" $GITHUB_WORKSPACE/matrix/turnserver.conf
 
       - name: Add secrets to mautrix-telegram config files
         env:
@@ -59,15 +59,15 @@ jobs:
           MATRIX_TELEGRAM_API_HASH: ${{ secrets.matrix_telegram_api_hash }}
           MATRIX_TELEGRAM_BOT_TOKEN: ${{ secrets.matrix_telegram_bot_token }}
         run: |
-          sed -i "s/(matrix_telegram_as_token)/$MATRIX_TELEGRAM_AS_TOKEN/g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/app-service-registration.yaml
-          sed -i "s/(matrix_telegram_hs_token)/$MATRIX_TELEGRAM_HS_TOKEN/g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/app-service-registration.yaml
-          sed -i "s/(matrix_telegram_sender_localpart)/$MATRIX_TELEGRAM_SENDER_LOCALPART/g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/app-service-registration.yaml
-          sed -i "s/(matrix_telegram_postgres_password)/$MATRIX_TELEGRAM_POSTGRES_PASSWORD/g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
-          sed -i "s/(matrix_telegram_as_token)/$MATRIX_TELEGRAM_AS_TOKEN/g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
-          sed -i "s/(matrix_telegram_hs_token)/$MATRIX_TELEGRAM_HS_TOKEN/g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
-          sed -i "s/(matrix_telegram_api_id)/$MATRIX_TELEGRAM_API_ID/g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
-          sed -i "s/(matrix_telegram_api_hash)/$MATRIX_TELEGRAM_API_HASH/g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
-          sed -i "s/(matrix_telegram_bot_token)/$MATRIX_TELEGRAM_BOT_TOKEN/g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
+          sed -i "s|(matrix_telegram_as_token)|$MATRIX_TELEGRAM_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/app-service-registration.yaml
+          sed -i "s|(matrix_telegram_hs_token)|$MATRIX_TELEGRAM_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/app-service-registration.yaml
+          sed -i "s|(matrix_telegram_sender_localpart)|$MATRIX_TELEGRAM_SENDER_LOCALPART|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/app-service-registration.yaml
+          sed -i "s|(matrix_telegram_postgres_password)|$MATRIX_TELEGRAM_POSTGRES_PASSWORD|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
+          sed -i "s|(matrix_telegram_as_token)|$MATRIX_TELEGRAM_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
+          sed -i "s|(matrix_telegram_hs_token)|$MATRIX_TELEGRAM_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
+          sed -i "s|(matrix_telegram_api_id)|$MATRIX_TELEGRAM_API_ID|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
+          sed -i "s|(matrix_telegram_api_hash)|$MATRIX_TELEGRAM_API_HASH|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
+          sed -i "s|(matrix_telegram_bot_token)|$MATRIX_TELEGRAM_BOT_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
 
       - name: Add secrets to hookshot config files
         env:
@@ -77,11 +77,11 @@ jobs:
           MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_ID: ${{ secrets.matrix_hookshot_github_oauth_client_id }}
           MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_SECRET: ${{ secrets.matrix_hookshot_github_oauth_client_secret }}
         run: |
-          sed -i "s/(matrix_hookshot_as_token)/$MATRIX_HOOKSHOT_AS_TOKEN/g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/app-service-registration.yaml
-          sed -i "s/(matrix_hookshot_hs_token)/$MATRIX_HOOKSHOT_HS_TOKEN/g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/app-service-registration.yaml
-          sed -i "s/(matrix_hookshot_github_webhook_secret)/$MATRIX_HOOKSHOT_GITHUB_WEBHOOK_SECRET/g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
-          sed -i "s/(matrix_hookshot_github_oauth_client_id)/$MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_ID/g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
-          sed -i "s/(matrix_hookshot_github_oauth_client_secret)/$MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_SECRET/g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
+          sed -i "s|(matrix_hookshot_as_token)|$MATRIX_HOOKSHOT_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/app-service-registration.yaml
+          sed -i "s|(matrix_hookshot_hs_token)|$MATRIX_HOOKSHOT_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/app-service-registration.yaml
+          sed -i "s|(matrix_hookshot_github_webhook_secret)|$MATRIX_HOOKSHOT_GITHUB_WEBHOOK_SECRET|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
+          sed -i "s|(matrix_hookshot_github_oauth_client_id)|$MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_ID|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
+          sed -i "s|(matrix_hookshot_github_oauth_client_secret)|$MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_SECRET|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
 
       - name: Start Deployment
         uses: FarisZR/docker-compose-gitops-action@v1
