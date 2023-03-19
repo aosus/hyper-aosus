@@ -1,0 +1,154 @@
+version: '3.3'
+
+networks:
+  default:
+  telegram:
+  web:
+    external: true
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    # These will be used in homeserver.yaml later on
+    environment:
+      - POSTGRES_DB=synapse
+      - POSTGRES_USER=synapse
+      - POSTGRES_PASSWORD=${MATRIX_POSTGRES_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - /home/aosus/matrix/postgresql:/var/lib/postgresql/data:rw
+    networks:
+      default:
+
+  synapse:
+    image: matrixdotorg/synapse:latest
+    container_name: synapse
+    restart: always
+    volumes:
+      - /home/aosus/matrix/synapse/media_store:/data/media-store
+    configs:
+      - source: synapse-homeserver
+        target: /data/homeserver.yaml
+        uid: "991"
+        gid: "991"
+      - source: synapse-log-config
+        target: /data/log.config
+        uid: "991"
+        gid: "991"
+      - source: mautrix-telegram-appservice
+        target: /app-services/telegram.yaml
+        uid: "991"
+        gid: "991"
+      - source: mautrix-hookshot-appservice
+        target: /app-services/hookshot.yml
+        uid: "991"
+        gid: "991"
+    secrets:
+      - source: matrix-signing-key
+        target: signing.key
+        uid: "991"
+        gid: "991"
+    healthcheck:
+      test: [ "CMD", "curl", "-fSs", "http://localhost:8008/health" ]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      default:
+      web:
+
+  synapse-admin:
+    container_name: synapse-admin
+    image: awesometechnologies/synapse-admin:latest
+    ports:
+      - "127.0.0.1:8080:80"
+    restart: unless-stopped
+
+  mautrix-telegram:
+    container_name: mautrix-telegram
+    image: dock.mau.dev/mautrix/telegram:v0.13
+    configs:
+      - source: mautrix-telegram-appservice
+        target: /data/registration.yaml
+      - source: mautrix-telegram-config
+        target: /data/config.yaml
+    networks:
+      default:
+      telegram:
+
+  postgres-telegram:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=telegram
+      - POSTGRES_USER=telegram
+      - POSTGRES_PASSWORD=${MATRIX_TELEGRAM_POSTGRES_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - /home/aosus/matrix/telegram/postgresql:/var/lib/postgresql/data:rw
+    networks:
+      telegram:
+
+  matrix-hookshot:
+    image: halfshot/matrix-hookshot:latest
+    container_name: matrix-hookshot
+    restart: always
+    configs:
+      - source: matrix-hookshot-appservice
+        target: /data/registration.yml
+      - source: matrix-hookshot-config
+        target: /data/config.yml
+    secrets:
+      - source: matrix-hookshot-github-private-key
+        target: github-key.pem
+      - source: matrix-hookshot-pass-key
+        target: passkey.pem
+    expose:
+      - 9993 # Homeserver appservice port
+      - 9000 # Webhook port
+      - 9002 # widgets port
+    networks:
+      web:
+      default:
+
+  coturn:
+      image: coturn/coturn:alpine
+      restart: always
+      ports:
+        - 3478:3478
+        - 3478:3478/udp
+        - 48000-49200:48000-49200/udp
+      environment:
+        - min-port=48000
+        - max-port=49200
+      volumes:
+        - /home/aosus/certbot/letsencrypt:/etc/letsencrypt:ro
+      configs:
+        - source: coturn
+          target: /etc/coturn/turnserver.conf
+
+configs:
+  synapse-homeserver:
+    file: /home/aosus/matrix/homeserver.yaml
+  synapse-log-config:
+    file: /home/aosus/matrix/log.config
+  mautrix-telegram-appservice:
+    file: /home/aosus/matrix/mautrix-telegram/app-service-registration.yaml
+  mautrix-telegram-config:
+    file: /home/aosus/matrix/mautrix-telegram/config.yaml
+  matrix-hookshot-appservice:
+    file: /home/aosus/matrix/matrix-hookshot/app-service-registration.yaml
+  matrix-hookshot-config:
+    file: /home/aosus/matrix/matrix-hookshot/config.yaml
+  coturn:
+    file: /home/matrix/turnserver.conf
+# import secrets from environment variables set by the github runner
+secrets:
+  matrix-signing-key:
+    environment: "MATRIX_SIGNING_KEY"
+  matrix-hookshot-github-private-key:
+    environment: "MATRIX_HOOKSHOT_GITHUB_PRIVATE_KEY"
+  matrix-hookshot-pass-key:
+    environment: "MATRIX_HOOKSHOT_GITHUB_PASS_KEY"

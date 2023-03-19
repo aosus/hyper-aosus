@@ -1,0 +1,15 @@
+id: telegram
+as_token: (matrix_telegram_as_token)
+hs_token: (matrix_telegram_hs_token)
+namespaces:
+    users:
+    - exclusive: true
+      regex: '@telegram_.*:aosus\.org'
+    - exclusive: true
+      regex: '@telegrambot:aosus\.org'
+    aliases:
+    - exclusive: true
+      regex: \#telegram_.*:aosus\.org
+url: http://mautrix-telegram:29317
+sender_localpart: (matrix_telegram_sender_localpart)
+rate_limited: false
