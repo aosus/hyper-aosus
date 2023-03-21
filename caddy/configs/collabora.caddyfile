@@ -2,5 +2,9 @@ libreoffice.aosus.org {
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 	}
-	reverse_proxy nextcloud-collabora:9980
+	reverse_proxy https://nextcloud-collabora:9980 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
 }
