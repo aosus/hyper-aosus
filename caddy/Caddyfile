@@ -7,4 +7,4 @@ turn.aosus.org {
 	abort
 }
 
-import /etc/caddy/configs/*.caddyfile%
+import /etc/caddy/configs/*.caddyfile
