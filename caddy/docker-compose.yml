@@ -3,6 +3,8 @@ version: "3.7"
 networks:
   web:
     external: true
+  discourse:
+    external: true
 
 services:
   caddy:
@@ -24,6 +26,7 @@ services:
       - config:/config
     networks:
       web:
+      discourse:
 configs:
   Caddyfile:
     file: /home/aosus/caddy/Caddyfile
