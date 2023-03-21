@@ -19,7 +19,7 @@ services:
       - source: Caddyfile
         target: /etc/caddy/Caddyfile
     volumes:
-      - /home/ubuntu/caddy/configs:/etc/caddy/configs:ro
+      - /home/aosus/caddy/configs:/etc/caddy/configs:ro
       - data:/data
       - config:/config
     networks:
