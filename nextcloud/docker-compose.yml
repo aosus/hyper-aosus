@@ -16,6 +16,7 @@ services:
         target: /var/www/html/config/config.php
     depends_on:
       - redis
+      - postgresql
     environment:
       - NEXTCLOUD_TRUSTED_DOMAINS=cloud.aosus.org
       - POSTGRES_HOST=postgresql
@@ -113,6 +114,7 @@ services:
     entrypoint: /cron.sh
     depends_on:
       - redis
+      - postgresql
 
   clamav:
     image: mkodockx/docker-clamav:alpine
