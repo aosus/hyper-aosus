@@ -131,7 +131,7 @@ services:
       - min-port=48000
       - max-port=49200
     volumes:
-      - /home/aosus/certbot/letsencrypt:/etc/letsencrypt:ro
+      - caddy_data:/caddy-data:ro
     configs:
       - source: coturn
         target: /etc/coturn/turnserver.conf
@@ -159,3 +159,7 @@ secrets:
     environment: "MATRIX_HOOKSHOT_GITHUB_PRIVATE_KEY"
   matrix-hookshot-pass-key:
     environment: "MATRIX_HOOKSHOT_PASS_KEY"
+
+volumes:
+  caddy_data:
+    external: true

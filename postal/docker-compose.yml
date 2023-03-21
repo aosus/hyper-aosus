@@ -42,7 +42,7 @@ services:
         uid: "0"
         gid: "0"
     volumes:
-      - /home/aosus/certbot/letsencrypt/:/ssl:ro
+      - caddy_data:/caddy-data:ro
     networks:
       - default
     depends_on: 
@@ -178,3 +178,5 @@ volumes:
   spamassassin-data:
   spamassassin-config:
   spamassassin-logs:
+  caddy_data:
+    external: true
