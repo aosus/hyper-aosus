@@ -3,4 +3,5 @@ mailer.aosus.org {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 	}
 	reverse_proxy postal:5000
+	encode gzip zstd
 }
