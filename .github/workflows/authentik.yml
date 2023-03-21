@@ -33,6 +33,9 @@ jobs:
           AUTHENTIK_EMAIL_USERNAME: ${{ secrets.authentik_email_username }}
           AUTHENTIK_EMAIL_PASSWORD: ${{ secrets.authentik_email_password }}
           AUTHENTIK_SECRET_KEY: ${{ secrets.authentik_secret_key }}
+          AUTHENTIK_EMAIL__PORT: ${{ secrets.authentik_email__port }}
+          AUTHENTIK_EMAIL__HOST: ${{ secrets.authentik_email__host }}
+          AUTHENTIK_EMAIL__FROM: ${{ secrets.authentik_email__from }}
         with:
           remote_docker_host: ${{ secrets.server_address }}
           tailscale_ssh: true # no need for manual private and public keys
