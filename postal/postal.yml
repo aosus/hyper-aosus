@@ -20,8 +20,8 @@ smtp_server:
   port: 25
   bind_address: 0.0.0.0
   tls_enabled: true
-  tls_certificate_path: /ssl/live/aosus.org/fullchain.pem
-  tls_private_key_path: /ssl/live/aosus.org/privkey.pem
+  tls_certificate_path: /caddy-data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mailer.aosus.org/mailer.aosus.org.crt
+  tls_private_key_path: /caddy-data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mailer.aosus.org/mailer.aosus.org.key
   ssl_version: TLSv1_2
 
 logging:
