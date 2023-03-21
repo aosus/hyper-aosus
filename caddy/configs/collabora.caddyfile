@@ -7,4 +7,5 @@ libreoffice.aosus.org {
 			tls_insecure_skip_verify
 		}
 	}
+	encode gzip zstd
 }
