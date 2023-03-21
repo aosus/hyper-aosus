@@ -33,7 +33,7 @@ $CONFIG = array (
   ),
   'datadirectory' => '/var/www/html/data',
   'dbtype' => 'pgsql',
-  'version' => '25.0.4.1',
+  'version' => getenv('NEXTCLOUD_VERSION'),
   'overwrite.cli.url' => 'http://localhost',
   'default_phone_region' => 'SA',
   'dbname' => getenv('POSTGRES_DB'),
