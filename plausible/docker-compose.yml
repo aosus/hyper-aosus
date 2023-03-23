@@ -42,10 +42,10 @@ services:
     environment:
       - BASE_URL=https://pa.aosus.org
       - DISALBLE_REGISTRATION=true
-      - MAILER_EMAI=stats@services.aosus.org
-      - SMTP_HOST_ADDR=mailer.aosus.org
-      - SMTP_HOST_PORT=25
-      - SMTP_USER_NAME=aosus/aosus-hyper
+      - MAILER_EMAI=plausible@services.aosus.org
+      - SMTP_HOST_ADDR=smtp.eu.mailgun.org
+      - SMTP_HOST_PORT=587
+      - SMTP_USER_NAME=plausible@services.aosus.org
       - SECRET_KEY_BASE
       - SMTP_USER_PWD
       - GOOGLE_CLIENT_ID

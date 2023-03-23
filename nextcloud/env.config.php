@@ -25,6 +25,7 @@ $CONFIG = array (
   'mail_from_address' => getenv('MAIL_ADDRESS'),
   'mail_domain' => getenv('MAIL_DOMAIN'),
   'mail_smtphost' => getenv('SMTP_HOST'),
+  'mail_smtpport' => getenv('SMTP_PORT'),
   'mail_smtpname' => getenv('SMTP_USER_NAME'),
   'mail_smtppassword' => getenv('SMTP_PASSWORD'),
   'maintenance' => getenv('MAINTENANCE') ?: false,
