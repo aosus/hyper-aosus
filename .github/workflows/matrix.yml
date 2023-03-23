@@ -34,6 +34,7 @@ jobs:
           MATRIX_OIDC_CLIENT_ID: ${{ secrets.matrix_oidc_client_id }}
           MATRIX_OIDC_CLIENT_SECRET: ${{ secrets.matrix_oidc_client_secret }}
           MATRIX_POSTGRES_PASSWORD: ${{ secrets.matrix_postgres_password }}
+          MATRIX_SMTP_PASS: ${{ secrets.matrix_smtp_pass }}
         run: |
           sed -i "s|(matrix_turn_shared_secret)|$MATRIX_TURN_SHARED_SECRET|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
           sed -i "s|(matrix_registration_shared_secret)|$MATRIX_REGISTRATION_SHARED_SECRET|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
@@ -42,6 +43,7 @@ jobs:
           sed -i "s|(matrix_oidc_client_id)|$MATRIX_OIDC_CLIENT_ID|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
           sed -i "s|(matrix_oidc_client_secret)|$MATRIX_OIDC_CLIENT_SECRET|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
           sed -i "s|(matrix_postgres_password)|$MATRIX_POSTGRES_PASSWORD|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
+          sed -i "s|(matrix_smtp_pass)|$MATRIX_SMTP_PASS|g" $GITHUB_WORKSPACE/matrix/homeserver.yaml
 
       - name: Add secrets to turnserver.conf
         env:

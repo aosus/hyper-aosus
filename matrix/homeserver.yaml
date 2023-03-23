@@ -2110,17 +2110,18 @@ ui_auth:
 email:
   # The hostname of the outgoing SMTP server to use. Defaults to 'localhost'.
   #
-  smtp_host: mailer.aosus.org
+  smtp_host: smtp.eu.mailgun.org
+
 
   # The port on the mail server for outgoing SMTP. Defaults to 25.
   #
-  smtp_port: 25
+  smtp_port: 587
 
   # Username/password for authentication to the SMTP server. By default, no
   # authentication is attempted.
   #
-  smtp_user: "aosus/aosus-hyper"
-  smtp_pass: "(smtp_pass)"
+  smtp_user: "synapse@services.aosus.org"
+  smtp_pass: "(matrix_smtp_pass)"
 
   # Uncomment the following to require TLS transport security for SMTP.
   # By default, Synapse will connect over plain text, and will then switch to
