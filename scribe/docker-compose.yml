@@ -6,7 +6,7 @@ networks:
 services:
   srcibe:
     container_name: scribe
-    image: fariszr/scribe:latest
+    image: oci.fariszr.com/fariszr/scribe:latest
     restart: always
     environment:
       - APP_DOMAIN=scribe.aosus.org
