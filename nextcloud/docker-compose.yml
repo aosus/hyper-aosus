@@ -13,7 +13,7 @@ services:
       - /home/aosus/nextcloud/nextcloud-data:/var/www/html/data:rw
     configs:
       - source: nextcloud
-        target: /var/www/html/config/config.php
+        target: /var/www/html/config/env.config.php
     depends_on:
       - redis
       - postgresql
@@ -41,9 +41,6 @@ services:
     hostname: postgresql
     image: postgres:13-alpine
     restart: always
-    configs:
-      - source: nextcloud
-        target: /var/www/html/config/config.php
     volumes:
       - /home/aosus/nextcloud/postgresql:/var/lib/postgresql/data:rw
     environment:
@@ -60,7 +57,7 @@ services:
       - /var/lib/redis
     configs:
       - source: nextcloud
-        target: /var/www/html/config/config.php
+        target: /var/www/html/config/env.config.php
     environment:
       - REDIS_HOST_PASSWORD
     command: redis-server --requirepass ${REDIS_HOST_PASSWORD}
@@ -71,7 +68,7 @@ services:
     container_name: nextcloud_web
     configs:
       - source: nextcloud
-        target: /var/www/html/config/config.php
+        target: /var/www/html/config/env.config.php
       - source: nginx
         target: /etc/nginx/nginx.conf
     volumes:
@@ -107,7 +104,7 @@ services:
       - SECRET
     configs:
       - source: nextcloud
-        target: /var/www/html/config/config.php
+        target: /var/www/html/config/env.config.php
     volumes:
       - /home/aosus/nextcloud/html:/var/www/html:rw
       - /home/aosus/nextcloud/nextcloud-data:/var/www/html/data:rw
@@ -148,7 +145,7 @@ services:
 
 configs:
   nextcloud:
-    file: /home/aosus/nextcloud/config.php
+    file: /home/aosus/nextcloud/env.config.php
   nginx:
     file: /home/aosus/nextcloud/nginx.conf
 
