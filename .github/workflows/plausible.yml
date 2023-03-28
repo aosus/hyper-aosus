@@ -22,7 +22,7 @@ jobs:
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
           hostname: Github-actions
-          version: 1.36.2
+          version: ${{ vars.TAILSCALE_VERSION }}
 
       - name: Start Deployment
         uses: FarisZR/docker-compose-gitops-action@v1
@@ -31,6 +31,7 @@ jobs:
           SMTP_USER_PWD: ${{ secrets.plausible_smtp_user_pwd }}
           GOOGLE_CLIENT_ID: ${{ secrets.plausible_google_client_id }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.plausible_google_client_secret }}
+          POSTGRES_PASSWORD: ${{ secrets.plausible_postgres_password }}
         with:
           remote_docker_host: ${{ secrets.server_address }}
           tailscale_ssh: true # no need for manual private and public keys
