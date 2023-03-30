@@ -21,7 +21,7 @@ services:
 
 
   synapse:
-    image: matrixdotorg/synapse:latest
+    image: ghcr.io/matrix-org/synapse:latest
     container_name: synapse
     restart: always
     volumes:
