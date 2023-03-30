@@ -11,6 +11,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: Plausible
+      url: https://pa.aosus.org
     steps:
       - name: checkout
         uses: actions/checkout@v3

@@ -11,6 +11,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: Docker-mailserver
     steps:
       - name: checkout
         uses: actions/checkout@v3

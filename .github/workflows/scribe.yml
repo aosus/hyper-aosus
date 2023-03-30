@@ -11,6 +11,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: scribe
+      url: https://scribe.aosus.org
     steps:
       - name: checkout
         uses: actions/checkout@v3
