@@ -1,6 +1,6 @@
 matrix.aosus.org {
-	reverse_proxy /hookshot/widgetapi/* matirx-hookshot:9002
-	reverse_proxy /hookshot/widgetapi matirx-hookshot:9002
+	reverse_proxy /hookshot/widgetapi/* matrix-hookshot:9002
+	reverse_proxy /hookshot/widgetapi matrix-hookshot:9002
 	reverse_proxy /hookshot/* matrix-hookshot:9000
 	reverse_proxy synapse:8008
 	encode zstd gzip
