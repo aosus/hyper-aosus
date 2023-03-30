@@ -26,8 +26,6 @@ jobs:
 
       - name: Start Deployment
         uses: FarisZR/docker-compose-gitops-action@v1
-        env:
-          EMAIL: ${{ secrets.email }}
         with:
           remote_docker_host: ${{ secrets.server_address }}
           tailscale_ssh: true # no need for manual private and public keys
