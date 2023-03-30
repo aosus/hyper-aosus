@@ -2,5 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base"
-  ]
+  ],
+  "automergeSchedule": [
+    "after 9pm",
+    "before 10pm"
+  ],
+  "docker": {
+    "automerge": true,
+    "pinDigests": true
+  }
 }
