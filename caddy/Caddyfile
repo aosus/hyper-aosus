@@ -1,7 +1,6 @@
 {
 	email {env.EMAIL}
 	admin off
-	key_type rsa4096
 }
 # generate cert for turn.aosus.org, but don't serve anything
 turn.aosus.org {
@@ -9,6 +8,9 @@ turn.aosus.org {
 }
 
 mail.aosus.org {
+	tls {
+		key_type rsa4096
+	}
 	abort
 }
 
