@@ -6,7 +6,7 @@ networks:
 
 services:
   postgres:
-    image: postgres:14-alpine
+    image: postgres:14.7-alpine
     restart: always
     # These will be used in homeserver.yaml later on
     environment:
@@ -21,7 +21,7 @@ services:
 
 
   synapse:
-    image: ghcr.io/matrix-org/synapse:latest
+    image: ghcr.io/matrix-org/synapse:v1.80.0
     container_name: synapse
     restart: always
     volumes:
@@ -84,7 +84,7 @@ services:
 
 
   postgres-telegram:
-    image: postgres:14-alpine
+    image: postgres:14.7-alpine
     restart: always
     environment:
       - POSTGRES_DB=telegram
@@ -98,7 +98,7 @@ services:
 
 
   matrix-hookshot:
-    image: halfshot/matrix-hookshot:latest
+    image: halfshot/matrix-hookshot:3.1.1
     container_name: matrix-hookshot
     restart: always
     configs:
@@ -121,7 +121,7 @@ services:
 
 
   coturn:
-    image: coturn/coturn:alpine
+    image: coturn/coturn:4.6.1-alpine
     restart: always
     ports:
       - 3478:3478

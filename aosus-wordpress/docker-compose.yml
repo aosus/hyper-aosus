@@ -5,7 +5,7 @@ networks:
 
 services:
   wordpress:
-    image: wordpress
+    image: wordpress:6.2.0-apache
     container_name: aosus-wordpress
     restart: always
     environment:
@@ -24,7 +24,7 @@ services:
         target: /usr/local/etc/php/conf.d/custom.ini
 
   mariadb:
-    image: mariadb:10
+    image: mariadb:10.11.2
     restart: always
     environment:
       MARIADB_USER: aosusworddb

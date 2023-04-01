@@ -6,7 +6,7 @@ networks:
 services:
   postgresql:
     hostname: postgresql
-    image: postgres:12-alpine
+    image: postgres:12.14-alpine
     restart: always
     volumes:
       - /home/aosus/authentik/db:/var/lib/postgresql/data
@@ -17,11 +17,11 @@ services:
 
   redis:
     hostname: redis
-    image: redis:alpine
+    image: redis:7.0.10-alpine
     restart: always
 
   server:
-    image: ghcr.io/goauthentik/server:latest
+    image: ghcr.io/goauthentik/server:2023.3
     container_name: authentik
     restart: always
     command: server
@@ -50,7 +50,7 @@ services:
       default:
 
   worker:
-    image: ghcr.io/goauthentik/server:latest
+    image: ghcr.io/goauthentik/server:2023.3
     restart: always
     command: worker
     environment:
