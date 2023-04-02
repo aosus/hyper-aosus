@@ -50,6 +50,21 @@ services:
       MARIADB_ROOT_PASSWORD:
     volumes:
       - /home/aosus/aosus-wordpress/mariadb:/var/lib/mysql
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 0
+        order: start-first
+        monitor: 4s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 configs:
   custom-ini:

@@ -18,6 +18,21 @@ services:
       - /home/aosus/matrix/postgresql:/var/lib/postgresql/data:rw
     networks:
       default:
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 0
+        order: start-first
+        monitor: 4s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 
   synapse:
@@ -125,7 +140,21 @@ services:
       - /home/aosus/matrix/telegram/postgresql:/var/lib/postgresql/data:rw
     networks:
       telegram:
-
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 0
+        order: start-first
+        monitor: 4s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   matrix-hookshot:
     image: halfshot/matrix-hookshot:3.1.1@sha256:bb3b7c924a6e6b2ee014a3a13347dc44ec72e47876464c507b661be493f35ecc
