@@ -25,7 +25,7 @@ services:
         target: /usr/local/etc/php/conf.d/custom.ini
 
   mariadb:
-    image: mariadb:10
+    image: mariadb:10.11.2
     restart: always
     environment:
       MARIADB_USER: wordpress

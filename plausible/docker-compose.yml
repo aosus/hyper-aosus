@@ -6,7 +6,7 @@ networks:
 services:
   plausible_db:
     restart: unless-stopped
-    image: postgres:12-alpine
+    image: postgres:12.14-alpine
     volumes:
       - /home/aosus/plausible/postgresql:/var/lib/postgresql/data
     environment:
@@ -29,7 +29,7 @@ services:
 
   plausible:
     restart: unless-stopped
-    image: plausible/analytics:latest
+    image: plausible/analytics:v1.5.1
     container_name: plausible
     command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
     expose:
