@@ -19,3 +19,18 @@ services:
       - SECRET_KEY_BASE
     networks:
       web:
+    deploy:
+      # swarm zero-down time deployment
+      update_config:
+        delay: 5s
+        order: start-first
+        monitor: 4s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
