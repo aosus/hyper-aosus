@@ -40,7 +40,7 @@ services:
 
   postgresql:
     hostname: postgresql
-    image: postgres:13.10-alpine@sha256:f5870b5a4d72544ee40a90b4b8574db808cdd4980168ff4d1e08ddf3e69d1863
+    image: postgres:15.2-alpine@sha256:ab88acc4edfbd7c728ad0fa741139b6cc830bd85138a40848672b784aab57306
     restart: always
     volumes:
       - /home/aosus/nextcloud/postgresql:/var/lib/postgresql/data:rw
