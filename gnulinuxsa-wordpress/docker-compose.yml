@@ -7,7 +7,7 @@ networks:
 
 services:
   wordpress:
-    image: wordpress:php7.4
+    image: wordpress:php7.4@sha256:7e46cf3373751b6d62b7a0fc3a7d6686f641a34a2a0eb18947da5375c55fd009
     container_name: gnulinuxsa-wordpress
     restart: always
     environment:
@@ -25,7 +25,7 @@ services:
         target: /usr/local/etc/php/conf.d/custom.ini
 
   mariadb:
-    image: mariadb:10.11.2
+    image: mariadb:10.11.2@sha256:9ff479f244cc596aed9794d035a9f352662f2caed933238c533024df64569853
     restart: always
     environment:
       MARIADB_USER: wordpress

@@ -5,7 +5,7 @@ networks:
 
 services:
   nextcloud:
-    image: nextcloud:26.0.0-fpm-alpine
+    image: nextcloud:26.0.0-fpm-alpine@sha256:a4e0486f9f7b7149922dc7e59aab6fff6c8664559032c26acf169967db1b2fee
     command: sh -c "apk add --no-cache postgresql-client imagemagick procps samba-client; /entrypoint.sh php-fpm"
     restart: always
     volumes:
@@ -40,7 +40,7 @@ services:
 
   postgresql:
     hostname: postgresql
-    image: postgres:13.10-alpine
+    image: postgres:13.10-alpine@sha256:f5870b5a4d72544ee40a90b4b8574db808cdd4980168ff4d1e08ddf3e69d1863
     restart: always
     volumes:
       - /home/aosus/nextcloud/postgresql:/var/lib/postgresql/data:rw
@@ -50,7 +50,7 @@ services:
       - POSTGRES_DB=ncdb
 
   redis:
-    image: redis:7.0.10-alpine
+    image: redis:7.0.10-alpine@sha256:221f7fa5b4c563971358755893263d64b0b52e9798f6320f2898be499fb3b6b6
     # container_name: nextcloud_redis
     # user: "1000:1000"
     restart: always
@@ -64,7 +64,7 @@ services:
     command: redis-server --requirepass ${REDIS_HOST_PASSWORD}
 
   nginx:
-    image: nginx:1.23.4-alpine
+    image: nginx:1.23.4-alpine@sha256:c94a22b036afa972426b82d5b0a49c959786005b4f6f81ac7467ca5538d0158f
     restart: always
     container_name: nextcloud_web
     configs:
@@ -81,7 +81,7 @@ services:
       default:
 
   cron:
-    image: nextcloud:26.0.0-fpm-alpine
+    image: nextcloud:26.0.0-fpm-alpine@sha256:a4e0486f9f7b7149922dc7e59aab6fff6c8664559032c26acf169967db1b2fee
     restart: always
     command: sh -c "apk add --no-cache postgresql-client imagemagick procps samba-client; /cron.sh"
     environment:
@@ -115,7 +115,7 @@ services:
       - postgresql
 
   clamav:
-    image: mkodockx/docker-clamav:alpine
+    image: mkodockx/docker-clamav:alpine@sha256:40c97633be145a03f115e36e53b5bd9bbb4814d8e70d54fa34752eada41df8da
     container_name: clamav
     restart: unless-stopped
     # ports:
@@ -129,7 +129,7 @@ services:
       start_period: 120s
 
   collabora:
-    image: collabora/code:22.05.12.4.1
+    image: collabora/code:22.05.12.4.1@sha256:c0c1317a0fda872fce547f99a893041e282e65608d2a12287824ca43bf573789
     container_name: nextcloud-collabora
     restart: always
     expose:

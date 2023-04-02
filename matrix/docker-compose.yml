@@ -6,7 +6,7 @@ networks:
 
 services:
   postgres:
-    image: postgres:14.7-alpine
+    image: postgres:14.7-alpine@sha256:f56d60bbff317706f8264d631a45526f8f1c1bb7cffaa09f33582cd894cd0ca3
     restart: always
     # These will be used in homeserver.yaml later on
     environment:
@@ -21,7 +21,7 @@ services:
 
 
   synapse:
-    image: ghcr.io/matrix-org/synapse:v1.80.0
+    image: ghcr.io/matrix-org/synapse:v1.80.0@sha256:23d09bfbe593a78d9a691bab9bc21d495b1afa15307311e17af76b96ce2fe0aa
     container_name: synapse
     restart: always
     volumes:
@@ -65,14 +65,14 @@ services:
 
   synapse-admin:
     container_name: synapse-admin
-    image: awesometechnologies/synapse-admin:latest
+    image: awesometechnologies/synapse-admin:latest@sha256:3d67b18b8834419badf1d521bb2ceef2951e08810a1cd3b37d7369670b44026c
     ports:
       - "127.0.0.1:8080:80"
     restart: unless-stopped
 
   mautrix-telegram:
     container_name: mautrix-telegram
-    image: dock.mau.dev/mautrix/telegram:v0.13.0
+    image: dock.mau.dev/mautrix/telegram:v0.13.0@sha256:1060d5ce28a7013452801b6fae5eb93afc8055e6b5cac0b238cc045f8d14409a
     configs:
       - source: mautrix-telegram-appservice
         target: /data/registration.yaml
@@ -84,7 +84,7 @@ services:
 
 
   postgres-telegram:
-    image: postgres:14.7-alpine
+    image: postgres:14.7-alpine@sha256:f56d60bbff317706f8264d631a45526f8f1c1bb7cffaa09f33582cd894cd0ca3
     restart: always
     environment:
       - POSTGRES_DB=telegram
@@ -98,7 +98,7 @@ services:
 
 
   matrix-hookshot:
-    image: halfshot/matrix-hookshot:3.1.1
+    image: halfshot/matrix-hookshot:3.1.1@sha256:bb3b7c924a6e6b2ee014a3a13347dc44ec72e47876464c507b661be493f35ecc
     container_name: matrix-hookshot
     restart: always
     configs:
@@ -121,7 +121,7 @@ services:
 
 
   coturn:
-    image: coturn/coturn:4.6.1-alpine
+    image: coturn/coturn:4.6.1-alpine@sha256:f8b47c4aa643a7b8f35b487edb8b20c4395b2a0263199ec7be3994565f8e10c6
     restart: always
     ports:
       - 3478:3478
