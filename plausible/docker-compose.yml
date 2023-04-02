@@ -6,7 +6,7 @@ networks:
 services:
   plausible_db:
     restart: unless-stopped
-    image: postgres:12.14-alpine
+    image: postgres:12.14-alpine@sha256:60b42ee4ee30dec1e0f03c44f2cf510550d56f08b0daf7d3954cc0464fdd2e04
     volumes:
       - /home/aosus/plausible/postgresql:/var/lib/postgresql/data
     environment:
@@ -14,7 +14,7 @@ services:
 
   plausible_events_db:
     restart: unless-stopped
-    image: clickhouse/clickhouse-server:22.6-alpine
+    image: clickhouse/clickhouse-server:22.6-alpine@sha256:554520e932c143c84acb97abb4f9fb8e887850d3d26d115ca258668b5c62aa9b
     volumes:
       - /home/aosus/plausible/event-data:/var/lib/clickhouse
     configs:
@@ -29,7 +29,7 @@ services:
 
   plausible:
     restart: unless-stopped
-    image: plausible/analytics:v1.5.1
+    image: plausible/analytics:v1.5.1@sha256:d8f8760b8b66b0430aeb27a8ddf4c29c96f11855f8f248e8ef2d02a8787eafc6
     container_name: plausible
     command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
     expose:

@@ -6,7 +6,7 @@ networks:
 services:
   postgresql:
     hostname: postgresql
-    image: postgres:12.14-alpine
+    image: postgres:12.14-alpine@sha256:60b42ee4ee30dec1e0f03c44f2cf510550d56f08b0daf7d3954cc0464fdd2e04
     restart: always
     volumes:
       - /home/aosus/authentik/db:/var/lib/postgresql/data
@@ -17,11 +17,11 @@ services:
 
   redis:
     hostname: redis
-    image: redis:7.0.10-alpine
+    image: redis:7.0.10-alpine@sha256:221f7fa5b4c563971358755893263d64b0b52e9798f6320f2898be499fb3b6b6
     restart: always
 
   server:
-    image: ghcr.io/goauthentik/server:2023.3
+    image: ghcr.io/goauthentik/server:2023.3@sha256:853d73ed2670715c45da2e7d92fa9a53d3efba5b275d1ad395ed961a003932ea
     container_name: authentik
     restart: always
     command: server
@@ -50,7 +50,7 @@ services:
       default:
 
   worker:
-    image: ghcr.io/goauthentik/server:2023.3
+    image: ghcr.io/goauthentik/server:2023.3@sha256:853d73ed2670715c45da2e7d92fa9a53d3efba5b275d1ad395ed961a003932ea
     restart: always
     command: worker
     environment:
