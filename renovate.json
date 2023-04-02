@@ -14,5 +14,15 @@
   },
   "github-actions": {
     "labels": ["Action updates"]
-  }
+  },
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchPackageNames": ["postgres", "clickhouse/clickhouse-server"],
+      "automerge": true
+    }
+  ]
 }
