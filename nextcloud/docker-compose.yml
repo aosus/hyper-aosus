@@ -5,7 +5,7 @@ networks:
 
 services:
   nextcloud:
-    image: nextcloud:26.0.0-fpm-alpine@sha256:a4e0486f9f7b7149922dc7e59aab6fff6c8664559032c26acf169967db1b2fee
+    image: nextcloud:26.0.0-fpm-alpine@sha256:d966b4f731bd7e193dad4fee3cb968abc68027989fede11ac7263d0b718893f8
     command: sh -c "apk add --no-cache postgresql-client imagemagick procps samba-client; /entrypoint.sh php-fpm"
     restart: always
     volumes:
@@ -81,7 +81,7 @@ services:
       default:
 
   cron:
-    image: nextcloud:26.0.0-fpm-alpine@sha256:a4e0486f9f7b7149922dc7e59aab6fff6c8664559032c26acf169967db1b2fee
+    image: nextcloud:26.0.0-fpm-alpine@sha256:d966b4f731bd7e193dad4fee3cb968abc68027989fede11ac7263d0b718893f8
     restart: always
     command: sh -c "apk add --no-cache postgresql-client imagemagick procps samba-client; /cron.sh"
     environment:
