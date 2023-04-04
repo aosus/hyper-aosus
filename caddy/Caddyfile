@@ -14,4 +14,9 @@ mail.aosus.org {
 	abort
 }
 
+www.aosus.org {
+	redir https://aosus.org{uri}
+	header Cache-Control "max-age=2592000, stale-while-revalidate=2592000"
+}
+
 import /etc/caddy/configs/*.caddyfile
