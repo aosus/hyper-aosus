@@ -9,6 +9,7 @@
   ],
   "docker": {
     "automerge": true,
+    "platformAutomerge": true,
     "pinDigests": true,
     "labels": ["Container updates"]
   },
@@ -22,7 +23,8 @@
       ],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "matchPackageNames": ["postgres", "clickhouse/clickhouse-server"],
-      "automerge": true
+      "automerge": true,
+      "platformAutomerge": true
     }
   ]
 }
