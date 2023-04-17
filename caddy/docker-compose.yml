@@ -24,6 +24,7 @@ services:
       - /home/aosus/caddy/configs:/etc/caddy/configs:ro
       - data:/data
       - config:/config
+      - piped-proxy:/var/run/ytproxy
     networks:
       web:
       discourse:
@@ -34,3 +35,6 @@ configs:
 volumes:
   data:
   config:
+  piped-proxy:
+    external: 
+      name: piped_piped-proxy

@@ -1,0 +1,91 @@
+version: "3"
+
+networks:
+  default:
+  web:
+    external: true
+
+services:
+  pipedfrontend:
+    image: 1337kavin/piped-frontend:latest@sha256:be7a246c741a0450c20af197e37109c6931fb82891e3d4d80ab16cd07467abad
+    restart: always
+    container_name: pipedfrontend
+    depends_on:
+      - piped
+    entrypoint: ash -c 'sed -i s/pipedapi.kavin.rocks/api.piped.aosus.org/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g "daemon off;"'
+    networks:
+      web:
+
+  piped-proxy:
+    image: 1337kavin/piped-proxy:latest@sha256:8f24d211c42fff109fcaa56ef2fad17e87a7a7820f0da2608f438bc4fe845d0d
+    container_name: piped-proxy
+    restart: always
+    environment:
+      - UDS=1
+    volumes:
+      - piped-proxy:/app/socket
+
+  piped:
+    image: 1337kavin/piped:latest@sha256:a606649853360270ce5fdda318572173dd16d679c98a26bd3cf6b1f6dde8a8f8
+    container_name: piped
+    restart: always
+    configs:
+      - source: piped
+        target: /app/config.properties
+    depends_on:
+      - postgres
+      
+  nginx:
+    image: nginx:mainline-alpine@sha256:dd2a9179765849767b10e2adde7e10c4ad6b7e4d4846e6b77ec93f080cd2db27
+    restart: always
+    container_name: piped-nginx
+    volumes:
+      - piped-proxy:/var/run/ytproxy
+    configs:
+      - source: nginx
+        target: /etc/nginx/nginx.conf
+      - source: pipedapi
+        target: /etc/nginx/conf.d/pipedapi.conf
+      - source: pipedproxy
+        target: /etc/nginx/conf.d/pipedproxy.conf
+      - source: pipedfrontend
+        target: /etc/nginx/conf.d/pipedfrontend.conf
+      - source: ytproxy
+        target: /etc/nginx/snippets/ytproxy.conf
+    depends_on:
+      - piped
+      - piped-proxy
+      - pipedfrontend
+    networks:
+      - default
+      - web
+
+  postgres:
+    image: postgres:15.2-alpine@sha256:07ec36ad2d5ab9250f38c8ef749239b662cf15d03c9ddb7167422edbbdf71156
+    container_name: piped-postgres
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data:rw
+    environment:
+      - POSTGRES_DB=piped
+      - POSTGRES_USER=piped
+      - POSTGRES_PASSWORD
+
+volumes:
+  postgres:
+  piped-proxy:
+
+
+configs:
+  nginx:
+    file: /home/aosus/piped/config/nginx.conf
+  pipedapi:
+    file: /home/aosus/piped/config/pipedapi.conf
+  pipedproxy:
+    file: /home/aosus/piped/config/pipedproxy.conf
+  pipedfrontend:
+    file: /home/aosus/piped/config/pipedfrontend.conf
+  ytproxy:
+    file: /home/aosus/piped/config/ytproxy.conf
+  piped: 
+    file: /home/aosus/piped/config.properties
