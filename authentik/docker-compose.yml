@@ -21,7 +21,7 @@ services:
     restart: always
 
   server:
-    image: ghcr.io/goauthentik/server:2023.4@sha256:b35a2c1c730f824a8ba6c281170d90a28eb1a7493336fb7cfbd43d8fe47a13cc
+    image: ghcr.io/goauthentik/server:2023.4@sha256:96c9f29247a270524056aff59f1bcb7118ef51d14b334b67ab2b75e8df30e829
     container_name: authentik
     restart: always
     command: server
@@ -50,7 +50,7 @@ services:
       default:
 
   worker:
-    image: ghcr.io/goauthentik/server:2023.4@sha256:b35a2c1c730f824a8ba6c281170d90a28eb1a7493336fb7cfbd43d8fe47a13cc
+    image: ghcr.io/goauthentik/server:2023.4@sha256:96c9f29247a270524056aff59f1bcb7118ef51d14b334b67ab2b75e8df30e829
     restart: always
     command: worker
     environment:
