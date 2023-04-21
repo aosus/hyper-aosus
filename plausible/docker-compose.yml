@@ -11,6 +11,21 @@ services:
       - /home/aosus/plausible/postgresql:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 0
+        order: start-first
+        monitor: 4s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   plausible_events_db:
     restart: unless-stopped
@@ -26,6 +41,21 @@ services:
       nofile:
         soft: 262144
         hard: 262144
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 0
+        order: start-first
+        monitor: 4s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   plausible:
     restart: unless-stopped
@@ -53,6 +83,21 @@ services:
     networks:
       default:
       web:
+    deploy:
+      # swarm zero-down time deployment
+      update_config:
+        delay: 5s
+        order: start-first
+        monitor: 4s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 volumes:
   geoip:

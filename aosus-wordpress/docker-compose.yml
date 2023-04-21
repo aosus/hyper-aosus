@@ -22,6 +22,21 @@ services:
     configs:
       - source: custom-ini
         target: /usr/local/etc/php/conf.d/custom.ini
+    deploy:
+      # swarm zero-down time deployment
+      update_config:
+        delay: 5s
+        order: start-first
+        monitor: 4s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   mariadb:
     image: mariadb:10.11.2@sha256:9ff479f244cc596aed9794d035a9f352662f2caed933238c533024df64569853
@@ -35,6 +50,21 @@ services:
       MARIADB_ROOT_PASSWORD:
     volumes:
       - /home/aosus/aosus-wordpress/mariadb:/var/lib/mysql
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 0
+        order: start-first
+        monitor: 4s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 configs:
   custom-ini:

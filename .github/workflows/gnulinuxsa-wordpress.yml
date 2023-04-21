@@ -32,6 +32,7 @@ jobs:
         env:
           MARIADB_PASSWORD: ${{ secrets.gnulinuxsa_wordpress_mariadb_password }}
         with:
+          docker_swarm: true
           remote_docker_host: ${{ secrets.server_address }}
           tailscale_ssh: true # no need for manual private and public keys
           compose_file_path: gnulinuxsa-wordpress/docker-compose.yml

@@ -36,6 +36,7 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.plausible_google_client_secret }}
           POSTGRES_PASSWORD: ${{ secrets.plausible_postgres_password }}
         with:
+          docker_swarm: true
           remote_docker_host: ${{ secrets.server_address }}
           tailscale_ssh: true # no need for manual private and public keys
           compose_file_path: plausible/docker-compose.yml

@@ -97,6 +97,7 @@ jobs:
           MATRIX_HOOKSHOT_GITHUB_PRIVATE_KEY:  ${{ secrets.matrix_hookshot_github_private_key }}
           MATRIX_HOOKSHOT_PASS_KEY:  ${{ secrets.matrix_hookshot_pass_key }}
         with:
+          docker_swarm: true
           remote_docker_host: ${{ secrets.server_address }}
           tailscale_ssh: true # no need for manual private and public keys
           compose_file_path: matrix/docker-compose.yml

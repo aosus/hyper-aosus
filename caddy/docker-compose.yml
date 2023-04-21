@@ -28,6 +28,29 @@ services:
     networks:
       web:
       discourse:
+    healthcheck:
+      # https://ryanblunden.com/for-those-looking-for-a-http-health-check-in-alpine-images-wget-is-available-from-the-base-image-a07997be8699
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    deploy:
+      # swarm zero-down time deployment
+      update_config:
+        delay: 5s
+        order: start-first
+        monitor: 30s
+        failure_action: rollback
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
 configs:
   Caddyfile:
     file: /home/aosus/caddy/Caddyfile
