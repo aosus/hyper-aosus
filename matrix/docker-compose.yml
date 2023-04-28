@@ -98,7 +98,7 @@ services:
 
 
   matrix-hookshot:
-    image: halfshot/matrix-hookshot:3.2.0@sha256:ce76acf2fa49072c0f2b20b5e6d2ad507343c2b7a075ea3a5b38016759a871f8
+    image: halfshot/matrix-hookshot:4.0.0@sha256:1b51ceb4d621fea793f2b7a33ae19178b2f84b7baa957805f31250021df86afd
     container_name: matrix-hookshot
     restart: always
     configs:
