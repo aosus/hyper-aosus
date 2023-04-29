@@ -67,7 +67,7 @@ services:
     container_name: synapse-admin
     image: awesometechnologies/synapse-admin:latest@sha256:3d67b18b8834419badf1d521bb2ceef2951e08810a1cd3b37d7369670b44026c
     ports:
-      - "127.0.0.1:8080:80"
+      - "100.68.206.74:8080:80"
     restart: unless-stopped
 
   mautrix-telegram:
