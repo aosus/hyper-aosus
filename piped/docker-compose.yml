@@ -12,7 +12,7 @@ services:
     container_name: pipedfrontend
     depends_on:
       - piped
-    entrypoint: ash -c 'sed -i s/pipedapi.kavin.rocks/api.piped.aosus.org/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g "daemon off;"'
+    entrypoint: ash -c 'sed -i s/pipedapi.kavin.rocks/api.piped.aosus.link/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g "daemon off;"'
     networks:
       web:
 
