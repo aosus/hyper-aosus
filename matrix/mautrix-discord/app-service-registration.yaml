@@ -1,0 +1,13 @@
+id: telegram
+as_token: (matrix_discord_as_token)
+hs_token: (matrix_discord_hs_token)
+rate_limited: false
+sender_localpart: (matrix_discord_sender_localpart)
+namespaces:
+    users:
+        - regex: ^@discordbot:aosus\.org$
+          exclusive: true
+        - regex: ^@discord_.*:aosus\.org$
+          exclusive: true
+de.sorunome.msc2409.push_ephemeral: true
+push_ephemeral: true

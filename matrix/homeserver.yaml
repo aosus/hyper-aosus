@@ -1426,6 +1426,7 @@ room_prejoin_state:
 app_service_config_files:
   - /app-services/telegram.yaml
   - /app-services/hookshot.yml
+  - /app-services/discord.yaml
 
 # Uncomment to enable tracking of application service IP addresses. Implicitly
 # enables MAU tracking for application service users.
