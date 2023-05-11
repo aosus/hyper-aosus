@@ -2,6 +2,32 @@ matrix.aosus.org {
 	reverse_proxy /hookshot/widgetapi/* matrix-hookshot:9002
 	reverse_proxy /hookshot/widgetapi matrix-hookshot:9002
 	reverse_proxy /hookshot/* matrix-hookshot:9000
+	# proxy direct images from discord CDN instead of uploading (https://docs.mau.fi/bridges/go/discord/direct-media.html)
+	handle /_matrix/media/*/download/aosus.org/discord_* {
+		header Access-Control-Allow-Origin *
+		# Remove path prefix
+		uri path_regexp ^/_matrix/media/.+/download/aosus\.org/discord_ /
+		# The mxc patterns use | instead of /, so replace it first turning it into attachments/1234/5678/filename.png
+		uri replace "%7C" /
+		reverse_proxy {
+			# reverse_proxy automatically includes the uri, so no {uri} at the end
+			to https://cdn.discordapp.com
+			# Caddy doesn't set the Host header automatically when reverse proxying
+			# (because usually reverse proxies are local and don't care about Host headers)
+			header_up Host cdn.discordapp.com
+		}
+	}
+	# Do the same for thumbnails, but redirect to media.discordapp.net (which is Discord's thumbnailing server, and happens to use similar width/height params as Matrix)
+	# Alternatively, you can point this at cdn.discordapp.com too. Clients shouldn't mind even if they get a bigger image than they asked for.
+	handle /_matrix/media/*/thumbnail/aosus.org/discord_* {
+		header Access-Control-Allow-Origin *
+		uri path_regexp ^/_matrix/media/.+/thumbnail/aosus\.org/discord_ /
+		uri replace "%7C" /
+		reverse_proxy {
+			to https://media.discordapp.net
+			header_up Host media.discordapp.net
+		}
+	}
 	reverse_proxy synapse:8008
 	encode zstd gzip
 }

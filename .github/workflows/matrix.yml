@@ -74,6 +74,20 @@ jobs:
           sed -i "s|(matrix_telegram_api_hash)|$MATRIX_TELEGRAM_API_HASH|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
           sed -i "s|(matrix_telegram_bot_token)|$MATRIX_TELEGRAM_BOT_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-telegram/config.yaml
 
+      - name: Add secrets to mautrix-discord config files
+        env:
+          MATRIX_DISCORD_AS_TOKEN: ${{ secrets.matrix_discord_as_token }}
+          MATRIX_DISCORD_HS_TOKEN: ${{ secrets.matrix_discord_hs_token }}
+          MATRIX_DISCORD_SENDER_LOCALPART: ${{ secrets.matrix_discord_sender_localpart }}
+          MATRIX_DISCORD_POSTGRES_PASSWORD: ${{ secrets.matrix_discord_postgres_password }}
+        run: |
+          sed -i "s|(matrix_discord_as_token)|$MATRIX_DISCORD_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/app-service-registration.yaml
+          sed -i "s|(matrix_discord_hs_token)|$MATRIX_DISCORD_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/app-service-registration.yaml
+          sed -i "s|(matrix_discord_sender_localpart)|$MATRIX_DISCORD_SENDER_LOCALPART|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/app-service-registration.yaml
+          sed -i "s|(matrix_discord_postgres_password)|$MATRIX_DISCORD_POSTGRES_PASSWORD|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
+          sed -i "s|(matrix_discord_as_token)|$MATRIX_DISCORD_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
+          sed -i "s|(matrix_discord_hs_token)|$MATRIX_DISCORD_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
+
       - name: Add secrets to hookshot config files
         env:
           MATRIX_HOOKSHOT_AS_TOKEN: ${{ secrets.matrix_hookshot_as_token }}
