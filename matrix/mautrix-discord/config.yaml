@@ -39,7 +39,7 @@ appservice:
         #           https://github.com/mattn/go-sqlite3#connection-string
         #   Postgres: Connection string. For example, postgres://user:password@host/database?sslmode=disable
         #             To connect via Unix socket, use something like postgres:///dbname?host=/var/run/postgresql
-        uri: postgres://discord:(matrix_discord_postgres_password)@postgres-discord/discord
+        uri: postgres://discord:(matrix_discord_postgres_password)@postgres-discord/discord?sslmode=disable
         # Maximum number of connections. Mostly relevant for Postgres.
         max_open_conns: 20
         max_idle_conns: 2
