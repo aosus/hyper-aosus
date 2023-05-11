@@ -47,7 +47,7 @@ services:
         target: /app-services/hookshot.yml
         uid: "991"
         gid: "991"
-      - source: matrix-discord-appservice
+      - source: mautrix-discord-appservice
         target: /app-services/discord.yaml
         uid: "991"
         gid: "991"
