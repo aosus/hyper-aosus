@@ -1865,21 +1865,21 @@ saml2_config:
 # use 'oidc' for the idp_id to ensure that existing users continue to be
 # recognised.)
 #
-oidc_providers:
-  - idp_id: authentik
-    idp_name: auth.aosus.org
-    discover: true
-    issuer: "(matrix_oidc_issuer)" # TO BE FILLED: domain and slug
-    client_id: "(matrix_oidc_client_id)" # TO BE FILLED
-    client_secret: "(matrix_oidc_client_secret)" # TO BE FILLED
-    scopes:
-      - "openid"
-      - "profile"
-      - "email"
-    user_mapping_provider:
-      config:
-        localpart_template: "{{ user.preferred_username }}"
-        display_name_template: "{{ user.name|capitalize }}" # TO BE FILLED: If your users have names in Authentik and you want those in Synapse, this should be replaced with user.name|capitalize.
+# oidc_providers:
+#   - idp_id: authentik
+#     idp_name: auth.aosus.org
+#     discover: true
+#     issuer: "(matrix_oidc_issuer)" # TO BE FILLED: domain and slug
+#     client_id: "(matrix_oidc_client_id)" # TO BE FILLED
+#     client_secret: "(matrix_oidc_client_secret)" # TO BE FILLED
+#     scopes:
+#       - "openid"
+#       - "profile"
+#       - "email"
+#     user_mapping_provider:
+#       config:
+#         localpart_template: "{{ user.preferred_username }}"
+#         display_name_template: "{{ user.name|capitalize }}" # TO BE FILLED: If your users have names in Authentik and you want those in Synapse, this should be replaced with user.name|capitalize.
 
   # Generic example
   #
