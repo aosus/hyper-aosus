@@ -156,13 +156,13 @@ bridge:
         # Should custom mxc:// URIs be used instead of reuploading media?
         enabled: true
         # Pattern for normal message attachments.
-        attachments: mxc://matrix.aosus.org/discord_attachments|{{.ChannelID}}|{{.AttachmentID}}|{{.FileName}}
+        attachments: mxc://aosus.org/discord_attachments|{{.ChannelID}}|{{.AttachmentID}}|{{.FileName}}
         # Pattern for custom emojis.
-        emojis: mxc://matrix.aosus.org/discord_emojis|{{.ID}}.{{.Ext}}
+        emojis: mxc://aosus.org/discord_emojis|{{.ID}}.{{.Ext}}
         # Pattern for stickers. Note that animated lottie stickers will not be converted if this is enabled.
-        stickers: mxc://matrix.aosus.org/discord_stickers|{{.ID}}.{{.Ext}}
+        stickers: mxc://aosus.org/discord_stickers|{{.ID}}.{{.Ext}}
         # Pattern for static user avatars.
-        avatars: mxc://matrix.aosus.org/discord_avatars|{{.UserID}}|{{.AvatarID}}.{{.Ext}}
+        avatars: mxc://aosus.org/discord_avatars|{{.UserID}}|{{.AvatarID}}.{{.Ext}}
     # Settings for converting animated stickers.
     animated_sticker:
         # Format to which animated stickers should be converted.
