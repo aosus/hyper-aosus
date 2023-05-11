@@ -47,6 +47,10 @@ services:
         target: /app-services/hookshot.yml
         uid: "991"
         gid: "991"
+      - source: matrix-discord-appservice
+        target: /app-services/discord.yaml
+        uid: "991"
+        gid: "991"
     secrets:
       - source: matrix-signing-key
         target: signing.key
@@ -72,6 +76,7 @@ services:
 
   mautrix-telegram:
     container_name: mautrix-telegram
+    restart: always
     image: dock.mau.dev/mautrix/telegram:v0.13.0@sha256:1060d5ce28a7013452801b6fae5eb93afc8055e6b5cac0b238cc045f8d14409a
     configs:
       - source: mautrix-telegram-appservice
@@ -96,6 +101,26 @@ services:
     networks:
       telegram:
 
+  mautrix-discord:
+    container_name: mautrix-discord
+    restart: always
+    image: dock.mau.dev/mautrix/discord:v0.3.0@sha256:110bf290b38afc2565a6003274fb06dbb88491f7dcd8e92d7586ed0bb2840c09
+    configs:
+      - source: mautrix-discord-appservice
+        target: /data/registration.yaml
+      - source: mautrix-discord-config
+        target: /data/config.yaml
+
+  postgres-discord:
+    image: postgres:14.7-alpine@sha256:07985c5c5e01ee550b30c67a2cf806f8b08b32f74e3f24c4cbef31305ef5776d
+    restart: always
+    environment:
+      - POSTGRES_DB=discord
+      - POSTGRES_USER=discord
+      - POSTGRES_PASSWORD=${MATRIX_DISCORD_POSTGRES_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - discord-postgres:/var/lib/postgresql/data:rw
 
   matrix-hookshot:
     image: halfshot/matrix-hookshot:4.0.0@sha256:1b51ceb4d621fea793f2b7a33ae19178b2f84b7baa957805f31250021df86afd
@@ -145,6 +170,10 @@ configs:
     file: /home/aosus/matrix/mautrix-telegram/app-service-registration.yaml
   mautrix-telegram-config:
     file: /home/aosus/matrix/mautrix-telegram/config.yaml
+  mautrix-discord-config:
+    file: /home/aosus/matrix/mautrix-discord/config.yaml
+  mautrix-discord-appservice:
+    file: /home/aosus/matrix/mautrix-discord/app-service-registration.yaml
   matrix-hookshot-appservice:
     file: /home/aosus/matrix/matrix-hookshot/app-service-registration.yaml
   matrix-hookshot-config:
@@ -163,3 +192,4 @@ secrets:
 volumes:
   caddy_data:
     external: true
+  discord-postgres:
