@@ -107,6 +107,7 @@ jobs:
         env:
           POSTGRES_PASSWORD: ${{ secrets.matrix_postgres_password }}
           MATRIX_TELEGRAM_POSTGRES_PASSWORD: ${{ secrets.matrix_telegram_postgres_password }}
+          MATRIX_DISCORD_POSTGRES_PASSWORD: ${{ secrets.matrix_discord_postgres_password }}
           MATRIX_SIGNING_KEY: ${{ secrets.matrix_signing_key }}
           MATRIX_HOOKSHOT_GITHUB_PRIVATE_KEY:  ${{ secrets.matrix_hookshot_github_private_key }}
           MATRIX_HOOKSHOT_PASS_KEY:  ${{ secrets.matrix_hookshot_pass_key }}
