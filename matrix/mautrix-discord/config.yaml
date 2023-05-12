@@ -84,7 +84,7 @@ bridge:
     #   .Discriminator - The 4 numbers after the name on Discord
     #   .Bot - Whether the user is a bot
     #   .System - Whether the user is an official system user
-    displayname_template: '{{.Username}}#{{.Discriminator}}{{if .Bot}} (bot){{end}}'
+    displayname_template: '{{.Username}}#{{.Discriminator}}{{if .Bot}} (bot){{end}} (Discord)'
     # Displayname template for Discord channels (bridged as rooms, or spaces when type=4).
     # Available variables:
     #   .Name - Channel name, or user displayname (pre-formatted with displayname_template) in DMs.
@@ -179,7 +179,7 @@ bridge:
             fps: 25 # only for webm, webp and gif (2, 5, 10, 20 or 25 recommended)
     # Servers to always allow double puppeting from
     double_puppet_server_map:
-        example.com: https://example.com
+        aosus.org: https://aosus.org
     # Allow using double puppeting from any server with a valid client .well-known file.
     double_puppet_allow_discovery: false
     # Shared secrets for https://github.com/devture/matrix-synapse-shared-secret-auth
