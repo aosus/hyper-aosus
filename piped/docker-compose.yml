@@ -61,7 +61,7 @@ services:
       - web
 
   postgres:
-    image: postgres:15.2-alpine@sha256:07ec36ad2d5ab9250f38c8ef749239b662cf15d03c9ddb7167422edbbdf71156
+    image: postgres:15.3-alpine@sha256:5b9805a36dfe65c019fbdf3f33fd57f7082a554cc9af79a135e3ec632344bd07
     container_name: piped-postgres
     restart: always
     volumes:
