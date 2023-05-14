@@ -25,6 +25,14 @@
       "matchPackageNames": ["postgres", "clickhouse/clickhouse-server"],
       "automerge": true,
       "platformAutomerge": true
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": ["major"],
+      "matchPackageNames": ["postgres", "clickhouse/clickhouse-server"],
+      "enabled": false
     }
   ]
 }
