@@ -26,7 +26,7 @@ services:
       - piped-proxy:/app/socket
 
   piped:
-    image: 1337kavin/piped:latest@sha256:50c591e5b8e5c8b0410f09cbf51ea21c86d233fb85f5b8d517814fa623acdf1d
+    image: 1337kavin/piped:latest@sha256:5dea4828a355ec9c32e392de14f871ac9ab6e038b2af4b59294c1df446165c7f
     container_name: piped
     restart: always
     configs:
