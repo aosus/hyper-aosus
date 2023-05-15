@@ -7,7 +7,7 @@ networks:
 
 services:
   pipedfrontend:
-    image: 1337kavin/piped-frontend:latest@sha256:abc104f298a8d9f4c8b0e455b611962b5d44039eb34856f69b78991325feb761
+    image: 1337kavin/piped-frontend:latest@sha256:26e43e2da34c52e44f5a9001af3f01c4c3065648b2967166bd918a3491c42fb2
     restart: always
     container_name: pipedfrontend
     depends_on:
