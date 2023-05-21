@@ -6,7 +6,7 @@ networks:
 
 services:
   postgres:
-    image: postgres:14.8-alpine@sha256:40fd63cb79dbccd3e9303e172f919a2937d24b144e1c330507857ba8ed02b006
+    image: postgres:14.8-alpine@sha256:b1724d122045b99871335c7bf8e28bedb1c7092d2e0ab405a77a7e364020cfa4
     restart: always
     # These will be used in homeserver.yaml later on
     environment:
@@ -89,7 +89,7 @@ services:
 
 
   postgres-telegram:
-    image: postgres:14.8-alpine@sha256:40fd63cb79dbccd3e9303e172f919a2937d24b144e1c330507857ba8ed02b006
+    image: postgres:14.8-alpine@sha256:b1724d122045b99871335c7bf8e28bedb1c7092d2e0ab405a77a7e364020cfa4
     restart: always
     environment:
       - POSTGRES_DB=telegram
@@ -112,7 +112,7 @@ services:
         target: /data/config.yaml
 
   postgres-discord:
-    image: postgres:14.8-alpine@sha256:40fd63cb79dbccd3e9303e172f919a2937d24b144e1c330507857ba8ed02b006
+    image: postgres:14.8-alpine@sha256:b1724d122045b99871335c7bf8e28bedb1c7092d2e0ab405a77a7e364020cfa4
     restart: always
     environment:
       - POSTGRES_DB=discord
