@@ -77,7 +77,7 @@ services:
   mautrix-telegram:
     container_name: mautrix-telegram
     restart: always
-    image: dock.mau.dev/mautrix/telegram:v0.13.0@sha256:1060d5ce28a7013452801b6fae5eb93afc8055e6b5cac0b238cc045f8d14409a
+    image: dock.mau.dev/mautrix/telegram:v0.14.0@sha256:30d74a4c0c23ee94dfdd6141c389930ef19dd79e207a0316d58ac422cc4f069b
     configs:
       - source: mautrix-telegram-appservice
         target: /data/registration.yaml
