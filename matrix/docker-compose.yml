@@ -123,7 +123,7 @@ services:
       - discord-postgres:/var/lib/postgresql/data:rw
 
   matrix-hookshot:
-    image: halfshot/matrix-hookshot:4.0.0@sha256:1b51ceb4d621fea793f2b7a33ae19178b2f84b7baa957805f31250021df86afd
+    image: halfshot/matrix-hookshot:4.1.0@sha256:5ffb914eada1f3582af03376234c438c5e479a5c52f4dd2b8daf0cfb4287464a
     container_name: matrix-hookshot
     restart: always
     configs:
