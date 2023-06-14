@@ -29,7 +29,7 @@ services:
 
   plausible:
     restart: unless-stopped
-    image: plausible/analytics:v1.5.1@sha256:d8f8760b8b66b0430aeb27a8ddf4c29c96f11855f8f248e8ef2d02a8787eafc6
+    image: plausible/analytics:v2.0.0@sha256:0c2d28bb38e43c561fd9a2a99c83c5d2e8622a0ba41785d7e8d9f5b18fa33983
     container_name: plausible
     command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
     expose:
