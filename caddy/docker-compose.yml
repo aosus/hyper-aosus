@@ -8,7 +8,7 @@ networks:
 
 services:
   caddy:
-    image: caddy:2.6.4-alpine@sha256:0f9eeda08c71f35efbfd0bb738ada870ee06e36d230c6c5dc5a763e9a82a7f3f
+    image: caddy:2.6.4-alpine@sha256:ca93629e04db8047dd93aa2bf1e66d24230146e83fc20034f5c210a895fd2f02
     container_name: caddy
     restart: always
     ports:
