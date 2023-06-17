@@ -35,6 +35,7 @@ jobs:
           GOOGLE_CLIENT_ID: ${{ secrets.plausible_google_client_id }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.plausible_google_client_secret }}
           POSTGRES_PASSWORD: ${{ secrets.plausible_postgres_password }}
+          MAXMIND_LICENSE_KEY: ${{ secrets.plausible_maxmind_license_key }}
         with:
           remote_docker_host: ${{ secrets.server_address }}
           tailscale_ssh: true # no need for manual private and public keys

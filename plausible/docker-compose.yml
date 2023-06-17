@@ -50,6 +50,8 @@ services:
       - SMTP_USER_PWD
       - GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET
+      - MAXMIND_LICENSE_KEY
+      - MAXMIND_EDITION=GeoLite2-City
     networks:
       default:
       web:
