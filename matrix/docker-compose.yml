@@ -146,7 +146,7 @@ services:
 
 
   coturn:
-    image: coturn/coturn:4.6.2-alpine@sha256:ea4b48270cda62874142280da7272348564a5e03e5190ed220b792b7de9402ef
+    image: coturn/coturn:4.6.2-alpine@sha256:cecbd85f5b27ce5bf00901192c9fe565c4be631f285411e5625427372a3a2f8b
     restart: always
     ports:
       - 3478:3478
