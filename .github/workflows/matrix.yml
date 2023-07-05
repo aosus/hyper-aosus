@@ -105,7 +105,7 @@ jobs:
           sed -i "s|(matrix_hookshot_github_oauth_client_secret)|$MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_SECRET|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
 
       - name: Start Deployment
-        uses: FarisZR/docker-compose-gitops-action@v1
+        uses: FarisZR/docker-compose-gitops-action@v1.1
         env:
           POSTGRES_PASSWORD: ${{ secrets.matrix_postgres_password }}
           MATRIX_TELEGRAM_POSTGRES_PASSWORD: ${{ secrets.matrix_telegram_postgres_password }}
