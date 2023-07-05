@@ -30,7 +30,7 @@ jobs:
           version: ${{ vars.TAILSCALE_VERSION }}
 
       - name: Start Deployment
-        uses: FarisZR/docker-compose-gitops-action@v1
+        uses: FarisZR/docker-compose-gitops-action@v1.1
         env:
           SECRET_KEY_BASE: ${{ secrets.plausible_secret_key_base }}
           SMTP_USER_PWD: ${{ secrets.plausible_smtp_user_pwd }}
