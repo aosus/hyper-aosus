@@ -32,6 +32,11 @@ matrix.aosus.org {
 	encode zstd gzip
 }
 
+syncv3-matrix-proxy.aosus.org {
+	reverse_proxy sliding-sync:8008
+	encode zstd gzip
+}
+
 aosus.org:8448 {
 	reverse_proxy synapse:8008
 	encode zstd gzip

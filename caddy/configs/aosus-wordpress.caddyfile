@@ -6,7 +6,8 @@ aosus.org {
 	header /.well-known/matrix/* Content-Type application/json
 	header /.well-known/matrix/* Access-Control-Allow-Origin *
 	respond /.well-known/matrix/server `{"m.server": "matrix.aosus.org:443"}`
-	respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://matrix.aosus.org:443"}}`
+	# add sliding sync availability (https://github.com/matrix-org/sliding-sync)
+	respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://matrix.aosus.org:443"},"org.matrix.msc3575.proxy":{"url":"https://syncv3-matrix-proxy.aosus.org"}}`
 	# redirect old links
 	redir /t/* https://discourse.aosus.org{uri} permanent
 	reverse_proxy aosus-wordpress:80

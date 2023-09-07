@@ -158,6 +158,34 @@ services:
       - source: coturn
         target: /etc/coturn/turnserver.conf
 
+  postgres-sync:
+    image: postgres:15.4-alpine@sha256:f36c528a2dc8747ea40b4cb8578da69fa75c5063fd6a71dcea3e3b2a6404ff7b
+    restart: always
+    # These will be used in homeserver.yaml later on
+    environment:
+      - POSTGRES_DB=sync
+      - POSTGRES_USER=sync
+      - POSTGRES_PASSWORD=${MATRIX_SLIDING_SYNC_POSTGRES_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - sliding-sync-postgres:/var/lib/postgresql/data
+    networks:
+      default:
+
+  sliding-sync:
+    image: ghcr.io/matrix-org/sliding-sync:v0.99.10@sha256:a7caef31c3e783403210af54eb45dca1943cf1abb1e17b9c3e246c8286b07377
+    restart: always
+    environment:
+      - SYNCV3_SERVER=https://matrix.aosus.org
+      - SYNCV3_DB=${MATRIX_SLIDING_SYNC_POSTGRES_CONNECTION_STRING}
+      - SYNCV3_SECRET=${MATRIX_SLIDING_SYNC_SECRET}
+    depends_on:
+      - postgres-sync
+      - synapse
+    networks:
+      web:
+      default:
+
 configs:
   synapse-homeserver:
     file: /home/aosus/matrix/homeserver.yaml
@@ -190,3 +218,4 @@ volumes:
   caddy_data:
     external: true
   discord-postgres:
+  sliding-sync-postgres:
