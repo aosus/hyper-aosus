@@ -142,21 +142,19 @@ services:
       default:
 
 
-  coturn:
-    image: coturn/coturn:4.6.2-alpine@sha256:cecbd85f5b27ce5bf00901192c9fe565c4be631f285411e5625427372a3a2f8b
-    restart: always
+  eturnal:
+    image: ghcr.io/processone/eturnal:1.12.0@sha256:c4ad43bc6a26d418455a0c89df9ce9850798c0a1401fc751ce43d831fd34e19b
+    user: 0:0 # to access caddy certs
     ports:
-      - 3478:3478
-      - 3478:3478/udp
-      - 48000-49200:48000-49200/udp
-    environment:
-      - min-port=48000
-      - max-port=49200
+      - '3478:3478'
+      - '49000-49200:49000-49200'
+      - '3478:3478/udp'
+      - '49000-49200:49000-49200/udp'
     volumes:
       - caddy_data:/caddy-data:ro
     configs:
-      - source: coturn
-        target: /etc/coturn/turnserver.conf
+      - source: eturnal
+        target: /etc/eturnal.yml
 
   postgres-sync:
     image: postgres:15.4-alpine@sha256:ff87187f2926e9b7c2f51aca88c248d98563b027930f766b19bbc21fb445c6dd
@@ -203,8 +201,8 @@ configs:
     file: /home/aosus/matrix/matrix-hookshot/app-service-registration.yaml
   matrix-hookshot-config:
     file: /home/aosus/matrix/matrix-hookshot/config.yaml
-  coturn:
-    file: /home/aosus/matrix/turnserver.conf
+  eturnal:
+    file: /home/aosus/matrix/eturnal.yml
 # import secrets from environment variables set by the github runner
 secrets:
   matrix-signing-key:
