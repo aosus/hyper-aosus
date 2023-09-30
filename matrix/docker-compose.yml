@@ -159,7 +159,7 @@ services:
         target: /etc/coturn/turnserver.conf
 
   postgres-sync:
-    image: postgres:15.4-alpine@sha256:f36c528a2dc8747ea40b4cb8578da69fa75c5063fd6a71dcea3e3b2a6404ff7b
+    image: postgres:15.4-alpine@sha256:ff87187f2926e9b7c2f51aca88c248d98563b027930f766b19bbc21fb445c6dd
     restart: always
     # These will be used in homeserver.yaml later on
     environment:
