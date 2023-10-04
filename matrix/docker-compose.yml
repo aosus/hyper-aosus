@@ -68,7 +68,7 @@ services:
 
   synapse-admin:
     container_name: synapse-admin
-    image: awesometechnologies/synapse-admin:latest@sha256:b65b1a769501bdd5f903824f499c0c26b96ab43304380566efbc6147356a0c67
+    image: awesometechnologies/synapse-admin:latest@sha256:b617c4ce427817eb33befe95bcab6f259197f0de528de8c507c6bea27a5194cf
     ports:
       - "100.68.206.74:8080:80"
     restart: unless-stopped
