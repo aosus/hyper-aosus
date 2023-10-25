@@ -1,7 +1,4 @@
 matrix.aosus.org {
-	reverse_proxy /hookshot/widgetapi/* matrix-hookshot:9002
-	reverse_proxy /hookshot/widgetapi matrix-hookshot:9002
-	reverse_proxy /hookshot/* matrix-hookshot:9000
 	# proxy direct images from discord CDN instead of uploading (https://docs.mau.fi/bridges/go/discord/direct-media.html)
 	handle /_matrix/media/*/download/aosus.org/discord_* {
 		header Access-Control-Allow-Origin *

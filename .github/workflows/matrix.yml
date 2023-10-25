@@ -90,20 +90,6 @@ jobs:
           sed -i "s|(matrix_discord_as_token)|$MATRIX_DISCORD_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
           sed -i "s|(matrix_discord_hs_token)|$MATRIX_DISCORD_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/mautrix-discord/config.yaml
 
-      - name: Add secrets to hookshot config files
-        env:
-          MATRIX_HOOKSHOT_AS_TOKEN: ${{ secrets.matrix_hookshot_as_token }}
-          MATRIX_HOOKSHOT_HS_TOKEN: ${{ secrets.matrix_hookshot_hs_token }}
-          MATRIX_HOOKSHOT_GITHUB_WEBHOOK_SECRET: ${{ secrets.matrix_hookshot_github_webhook_secret }}
-          MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_ID: ${{ secrets.matrix_hookshot_github_oauth_client_id }}
-          MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_SECRET: ${{ secrets.matrix_hookshot_github_oauth_client_secret }}
-        run: |
-          sed -i "s|(matrix_hookshot_as_token)|$MATRIX_HOOKSHOT_AS_TOKEN|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/app-service-registration.yaml
-          sed -i "s|(matrix_hookshot_hs_token)|$MATRIX_HOOKSHOT_HS_TOKEN|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/app-service-registration.yaml
-          sed -i "s|(matrix_hookshot_github_webhook_secret)|$MATRIX_HOOKSHOT_GITHUB_WEBHOOK_SECRET|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
-          sed -i "s|(matrix_hookshot_github_oauth_client_id)|$MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_ID|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
-          sed -i "s|(matrix_hookshot_github_oauth_client_secret)|$MATRIX_HOOKSHOT_GITHUB_OAUTH_CLIENT_SECRET|g" $GITHUB_WORKSPACE/matrix/matrix-hookshot/config.yaml
-
       - name: Start Deployment
         uses: FarisZR/docker-compose-gitops-action@v1.1
         env:
@@ -111,8 +97,6 @@ jobs:
           MATRIX_TELEGRAM_POSTGRES_PASSWORD: ${{ secrets.matrix_telegram_postgres_password }}
           MATRIX_DISCORD_POSTGRES_PASSWORD: ${{ secrets.matrix_discord_postgres_password }}
           MATRIX_SIGNING_KEY: ${{ secrets.matrix_signing_key }}
-          MATRIX_HOOKSHOT_GITHUB_PRIVATE_KEY:  ${{ secrets.matrix_hookshot_github_private_key }}
-          MATRIX_HOOKSHOT_PASS_KEY:  ${{ secrets.matrix_hookshot_pass_key }}
           MATRIX_SLIDING_SYNC_POSTGRES_PASSWORD: ${{ secrets.MATRIX_SLIDING_SYNC_POSTGRES_PASSWORD }}
           MATRIX_SLIDING_SYNC_POSTGRES_CONNECTION_STRING: ${{ secrets.MATRIX_SLIDING_SYNC_POSTGRES_CONNECTION_STRING }}
           MATRIX_SLIDING_SYNC_SECRET: ${{ secrets.MATRIX_SLIDING_SYNC_SECRET }}

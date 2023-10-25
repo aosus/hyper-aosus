@@ -43,10 +43,6 @@ services:
         target: /app-services/telegram.yaml
         uid: "991"
         gid: "991"
-      - source: matrix-hookshot-appservice
-        target: /app-services/hookshot.yml
-        uid: "991"
-        gid: "991"
       - source: mautrix-discord-appservice
         target: /app-services/discord.yaml
         uid: "991"
@@ -119,28 +115,6 @@ services:
     volumes:
       - discord-postgres:/var/lib/postgresql/data:rw
 
-  matrix-hookshot:
-    image: halfshot/matrix-hookshot:4.5.1@sha256:ceed583cefbac8e3fe2f8bbde3cce459fd9e90f1e72536aa4967ed5f34b4c3ac
-    container_name: matrix-hookshot
-    restart: always
-    configs:
-      - source: matrix-hookshot-appservice
-        target: /data/registration.yml
-      - source: matrix-hookshot-config
-        target: /data/config.yml
-    secrets:
-      - source: matrix-hookshot-github-private-key
-        target: github-key.pem
-      - source: matrix-hookshot-pass-key
-        target: passkey.pem
-    expose:
-      - 9993 # Homeserver appservice port
-      - 9000 # Webhook port
-      - 9002 # widgets port
-    networks:
-      web:
-      default:
-
 
   eturnal:
     image: ghcr.io/processone/eturnal:1.12.0@sha256:c4ad43bc6a26d418455a0c89df9ce9850798c0a1401fc751ce43d831fd34e19b
@@ -197,21 +171,12 @@ configs:
     file: /home/aosus/matrix/mautrix-discord/config.yaml
   mautrix-discord-appservice:
     file: /home/aosus/matrix/mautrix-discord/app-service-registration.yaml
-  matrix-hookshot-appservice:
-    file: /home/aosus/matrix/matrix-hookshot/app-service-registration.yaml
-  matrix-hookshot-config:
-    file: /home/aosus/matrix/matrix-hookshot/config.yaml
   eturnal:
     file: /home/aosus/matrix/eturnal.yml
 # import secrets from environment variables set by the github runner
 secrets:
   matrix-signing-key:
     environment: "MATRIX_SIGNING_KEY"
-  matrix-hookshot-github-private-key:
-    environment: "MATRIX_HOOKSHOT_GITHUB_PRIVATE_KEY"
-  matrix-hookshot-pass-key:
-    environment: "MATRIX_HOOKSHOT_PASS_KEY"
-
 volumes:
   caddy_data:
     external: true
