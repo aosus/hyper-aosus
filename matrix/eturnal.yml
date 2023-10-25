@@ -31,8 +31,8 @@ eturnal:
   tls_key_file: /caddy-data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/turn.aosus.org/turn.aosus.org.key
 
   ## UDP relay port range (usually, several ports per A/V call are required):
-  relay_min_port: 49000     # This is the default.
-  relay_max_port: 49200     # This is the default.
+  relay_min_port: 32000     # This is the default.
+  relay_max_port: 32200     # This is the default.
 
   ## Reject TURN relaying to the following addresses/networks:
   blacklist_peers:
