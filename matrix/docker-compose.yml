@@ -145,7 +145,7 @@ services:
       default:
 
   sliding-sync:
-    image: ghcr.io/matrix-org/sliding-sync:v0.99.11@sha256:42a1db931df998cd9603181d0ddaa9e69e9f963b91b597b71a25c1401b96ceeb
+    image: ghcr.io/matrix-org/sliding-sync:v0.99.12@sha256:2da27f7f9797320e65a4283cf95f5d8a5c22b7197a463d07143e145cc56c58bd
     restart: always
     environment:
       - SYNCV3_SERVER=https://matrix.aosus.org
