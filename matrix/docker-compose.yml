@@ -21,7 +21,7 @@ services:
 
 
   synapse:
-    image: ghcr.io/matrix-org/synapse:v1.96.1@sha256:06f22516cb76993572d553a99797b2b61a91f8389a76dc01f04127596b4f8ca8
+    image: ghcr.io/matrix-org/synapse:v1.97.0@sha256:416f4a294943df5747e574e60c492f86881e20abe885894284aa3746b23ce4ad
     container_name: synapse
     restart: always
     volumes:
