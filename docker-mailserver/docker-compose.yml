@@ -4,7 +4,7 @@ networks:
 
 services:
   mailserver:
-    image: ghcr.io/docker-mailserver/docker-mailserver:13.0.0@sha256:7aebcab5c256d5aec98ed42df9333d5a3c281c09b4f96887933f162c528327ee
+    image: ghcr.io/docker-mailserver/docker-mailserver:13.0.1@sha256:b7ca099b2a527e03b0c2c71a6b6f3bc090ea9e1d378c5e1c4506bf9b6341e6d2
     container_name: mailserver
     # If the FQDN for your mail-server is only two labels (eg: example.com),
     # you can assign this entirely to `hostname` and remove `domainname`.
