@@ -37,7 +37,7 @@ services:
       - postgres
       
   nginx:
-    image: nginx:mainline-alpine@sha256:3923f8de8d2214b9490e68fd6ae63ea604deddd166df2755b788bef04848b9bc
+    image: nginx:mainline-alpine@sha256:ba48c86adff12f1849920b6175c328b58b589f68feb082de8677309718945a56
     restart: always
     container_name: piped-nginx
     volumes:
