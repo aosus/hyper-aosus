@@ -1,8 +1,9 @@
-version: "3"
-
 networks:
   default:
     enable_ipv6: true
+    ipam:
+      config:
+        - subnet: 2001:db8:2::/64
   web:
     external: true
 
@@ -71,6 +72,30 @@ services:
       - POSTGRES_DB=piped
       - POSTGRES_USER=piped
       - POSTGRES_PASSWORD
+
+# schedule ipv6 rotations
+  ofelia:
+    image: mcuadros/ofelia:latest@sha256:c9c539182250cfd9e2ba7850ab2cf1af4df861ccc323c1647b2ceb49959b30be
+    depends_on:
+      - smart-ipv6-rotator
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+# automatically rotate IPV6 address used to comunicate with google
+  smart-ipv6-rotator:
+    image: quay.io/invidious/smart-ipv6-rotator@sha256:0580ec1e3e9096fbb300e59828d7f62c694b012927eb20f4b298d10baaacb4b2
+    container_name: smart-ipv6-rotator
+    privileged: true
+    userns_mode: host
+    network_mode: host
+    volumes:
+      - /home/aosus/piped/ipv6-rotator:/tmp:rw
+    command: run --ipv6range=2a01:4f9:6a:5393::/64
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.datecron.schedule: "@every 12h"
+      ofelia.job-exec.datecron.command: "run --ipv6range=2a01:4f9:6a:5393::/64"
 
 volumes:
   postgres:
