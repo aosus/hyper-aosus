@@ -25,6 +25,13 @@ matrix.aosus.org {
 			header_up Host media.discordapp.net
 		}
 	}
+	handle_errors {
+		# handle_errors is only triggerd on erros from Caddy and not the proxy, that's why we don't specifiy any errors here.
+		rewrite * /proxy_error_page.html
+		file_server {
+			root /srv/
+		}
+	}
 	reverse_proxy synapse:8008
 	encode zstd gzip
 }

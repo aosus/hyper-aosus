@@ -2,6 +2,13 @@ pa.aosus.org {
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 	}
+	handle_errors {
+		# handle_errors is only triggerd on erros from Caddy and not the proxy, that's why we don't specifiy any errors here.
+		rewrite * /proxy_error_page.html
+		file_server {
+			root /srv/
+		}
+	}
 	rewrite /js/pls.js /js/plausible.js
 	rewrite /js/pls2.js /js/plausible.hash.js
 	rewrite /js/pls3.js /js/plausible.outbound-links.js
