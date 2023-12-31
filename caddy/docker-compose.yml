@@ -22,7 +22,7 @@ services:
         target: /etc/caddy/Caddyfile
     volumes:
       - /home/aosus/caddy/configs:/etc/caddy/configs:ro
-      - /home/aosus/caddy/proxy_error_page.html:/srv/proxy_error_page.html
+      - /home/aosus/caddy/proxy_error_page.html:/srv/proxy_error_page.html:ro
       - data:/data
       - config:/config
       - piped-proxy:/var/run/ytproxy
