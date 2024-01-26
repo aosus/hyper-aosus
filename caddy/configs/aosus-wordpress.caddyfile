@@ -2,6 +2,13 @@ aosus.org {
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 	}
+	handle_errors {
+		# handle_errors is only triggerd on erros from Caddy and not the proxy, that's why we don't specifiy any errors here.
+		rewrite * /proxy_error_page.html
+		file_server {
+			root /srv/
+		}
+	}
 	# https://matrix-org.github.io/synapse/latest/reverse_proxy.html#caddy-v2
 	header /.well-known/matrix/* Content-Type application/json
 	header /.well-known/matrix/* Access-Control-Allow-Origin *

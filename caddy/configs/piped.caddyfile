@@ -16,11 +16,18 @@ piped.aosus.link {
 	respond /robots.txt 200 {
 		body "User-agent: *
 Disallow: /"
-	}    
+	}
+	handle_errors {
+		# handle_errors is only triggerd on erros from Caddy and not the proxy, that's why we don't specifiy any errors here.
+		rewrite * /proxy_error_page.html
+		file_server {
+			root /srv/
+		}
+	}
 	header {
-        X-Robots-Tag "noindex, noarchive, nofollow, nosnippet"
+		X-Robots-Tag "noindex, noarchive, nofollow, nosnippet"
 		X-XSS-Protection "1; mode=block"
-    }
+	}
 	# end aosus settings
 	reverse_proxy pipedfrontend:80
 	import piped-global
@@ -32,11 +39,11 @@ api.piped.aosus.link {
 	respond /robots.txt 200 {
 		body "User-agent: *
 Disallow: /"
-	}    
+	}
 	header {
-        X-Robots-Tag "noindex, noarchive, nofollow, nosnippet"
+		X-Robots-Tag "noindex, noarchive, nofollow, nosnippet"
 		X-XSS-Protection "1; mode=block"
-    }
+	}
 	# end aosus settings
 	reverse_proxy piped-nginx:80
 	import piped-global
@@ -50,11 +57,11 @@ proxy.piped.aosus.link {
 	respond /robots.txt 200 {
 		body "User-agent: *
 Disallow: /"
-	}    
+	}
 	header {
-        X-Robots-Tag "noindex, noarchive, nofollow, nosnippet"
+		X-Robots-Tag "noindex, noarchive, nofollow, nosnippet"
 		X-XSS-Protection "1; mode=block"
-    }
+	}
 	# end aosus settings
 	route {
 		header @ytproxy {

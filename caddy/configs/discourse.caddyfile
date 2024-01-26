@@ -2,6 +2,13 @@ discourse.aosus.org {
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 	}
+	handle_errors {
+		# handle_errors is only triggerd on erros from Caddy and not the proxy, that's why we don't specifiy any errors here.
+		rewrite * /proxy_error_page.html
+		file_server {
+			root /srv/
+		}
+	}
 	reverse_proxy app:80
 	encode zstd gzip
 }
