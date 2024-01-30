@@ -21,7 +21,7 @@ services:
 
 
   synapse:
-    image: ghcr.io/element-hq/synapse:v1.99.0@sha256:d67f79582f3dc053dfadb15c4c78b8f2623090da3c19fe60d3b6e66c65a7ca6f
+    image: ghcr.io/element-hq/synapse:v1.100.0@sha256:0f050ebb925851a4e4b7c9ab451388ed944aeabe5132107782fd41dd05a50f88
     container_name: synapse
     restart: always
     volumes:
