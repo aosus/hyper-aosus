@@ -1,6 +1,0 @@
-auth.aosus.org {
-	header {
-		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-	}
-	reverse_proxy authentik:9000
-}
